@@ -1,0 +1,43 @@
+\section{Apsolutna i relativna greška}
+
+Razliku $a-a^*$ između \textit{stvarne veličine} a i \textit{njene aproksimacije} $a^*$ nazivamo \textbf{greška aproksimacije}. Apsolutnu vrijednost greške aproksimacije nazivamo \textbf{apsolutna greška aproksimacije} i označavamo je s $\Delta a^*$. Vrijedi:
+
+$$
+\Delta a^* = |a-a^*|
+$$
+
+Omjer između apsolutne greške $\Delta a^*$ i apsolutne vrijednosti $|a|$ nazivamo \textbf{relativna greška} i označavamo je s $\delta a^*$. Vrijedi:
+
+$$
+\delta a^* = \frac{\Delta a^*}{|a|},\qquad a\neq0
+$$
+
+S obzirom da u praksi često nije poznata točna vrijednost $a$, koristi se \textbf{aproksimacija relativne greške}:
+
+$$
+\delta a^* \approx \frac{\Delta a^*}{|a^*|},\qquad a\neq0
+$$
+
+\begin{itemize}
+    \item Redoslijed izvršavanja operacija na računalu je bitan jer utječe na veličinu greške zbog ograničene pohrane decimalnih brojeva (floating point error).
+    \begin{itemize}
+        \item Zbrajanje i množenje nisu asocijativni
+        \item Množenje prema zbrajanju nije distributivno
+    \end{itemize}
+\end{itemize}
+
+\subsection{Katastrofalno kraćenje}
+
+Oduzimanje brojeva $x$ i $y$ koji su istog predzanaka može izazvati proizvoljno velike greške kada je $|x-y| \ll |x|,|y|$
+
+Za katastrofalno kraćenje vrijedi:
+
+\begin{gather*}
+(x-y)(1+\varepsilon) = x(1+\varepsilon_x) - y(1+\varepsilon_y)\\
+|\varepsilon| \leq \left|\frac{x}{x-y}\right| |\varepsilon_x| + \left|\frac{y}{x-y}\right| |\varepsilon_y|
+\end{gather*}
+
+Jedna od metoda izbjegavanja kraćenja je racionalizacija korijenu koja daje puno točniji rezultat za $x_1$:
+$$
+    x_1=-p+\sqrt{p^2+q}\cdot\frac{-p-\sqrt{p^2+q}}{-p-\sqrt{p^2+2}}=\frac{q}{p+\sqrt{p^2+q}}
+$$

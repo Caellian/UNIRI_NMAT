@@ -1,0 +1,106 @@
+\section{Lagrangeov interpolacijski polinom}
+
+Formula za Lagrangeov interpolacijski polinom (${\mathbf L}_n$) je:
+
+\begin{align}
+    {\mathbf I}_i(x) &\coloneq \prod_{\substack{j=0\\j\neq i}}^{n} \frac{x-x_j}{x_i-x_j}\\
+    {\mathbf L}_n(x) &\coloneq \sum_{i=0}^{n} y_i\mathbf{I}_i(x)
+\end{align}
+
+Lagrangeov interpolacijski polinom je bolji od korištenja vandermondeove determinante jer su sustavi dobiveni vandermondeovom determinantom nestabilni.
+Također je i postupak brži jer ne zahtjeva računanje inverzne matrice koja u računalnoj primjeni zahtjeva mnogo međukoraka i instrukcija.
+
+\begin{examplebox}[uporaba lagrangeovog polinoma]
+    Odredi interpolacijski polinom koristeći lagrangeove polinome ako su zadane sljedeće točke:
+
+    \center
+    \begin{tabular}{r|c|c|c}
+        $x$&-3&4&3\\
+        \hline
+        $y$&-4&2&0\\
+    \end{tabular}
+\end{examplebox}
+
+Računamo $\mathrm{I}_0(x), \mathrm{I}_1(x),$ i $\mathrm{I}_2(x)$ za točke:
+
+$$
+\mathrm{I}_0(x) = \frac{x-x_1}{x_0-x_1} \cdot \frac{x-x_2}{x_0-x_2} = \frac{x-4}{-3-4} \cdot \frac{x-3}{-3-3} = \frac{(x-4)(x-3)}{-7\cdot-6} = \frac{x^2-7x+12}{42}
+$$
+
+\begin{warningbox}[nedostajući član]
+    $$
+    \frac{x-x_j}{x_0-x_j}=\frac{x-x_0}{x_0-x_0}=\frac{x-x_0}{0}
+    $$
+\end{warningbox}
+
+\begin{align*}
+\mathrm{I}_1(x) &= \frac{(x-x_0)(x-x_2)}{(x_1-x_0)(x_1-x_2)} = \frac{(x+3)(x-3)}{7\cdot1} = \frac{x^2-9}{7}\\\\
+\mathrm{I}_2(x) &= \frac{(x-x_0)(x-x_1)}{(x_2-x_0)(x_2-x_1)} = \frac{(x+3)(x-4)}{6\cdot-1} = \frac{x^2-x-12}{-6}
+\end{align*}
+
+\begin{multicols}{2}
+
+\vspace*{0pt}
+
+Nakon uvrštavanja dobivamo polinom:
+\begin{align*}
+\mathrm{L}_2(x) &= y_0\mathrm{I}_0(x) + y_1\mathrm{I}_1(x) + y_2\mathrm{I}_2(x)\\
+&= -4\cdot\frac{x^2-7x+12}{42} + 2\cdot\frac{x^2-9}{7} + 0\cdot\frac{x^2-x-12}{-6}\\
+&= \frac{-2x^2+14x-24+6x^2-54}{21}\\
+&= \frac{4x^2}{21} + \frac{2x\cdot\cancel{7}}{3\cdot\cancel{7}} - \frac{26\cdot\cancel{3}}{7\cdot\cancel{3}}\\
+&\boxed{= {\frac{4}{21}}x^2 + {\frac{2}{3}}x - {\frac{26}{7}}}
+\end{align*}
+
+\vspace*{0pt}
+
+\newcolumn
+
+\vspace*{0pt}
+
+\begin{tikzpicture}
+    \begin{axis}[
+        xmin=-4,xmax=4.5,
+        ymin=-5,ymax=3,
+        ]
+        \addplot[plotlinefound] expression[samples=100]{4/21*\x^2 + 2/3*\x - 26/7} 
+                    node[pos=0.5,anchor=north west]{$y=\sin(2x)+\frac{1}{2}$};
+        \addplot[plotinterpolated] coordinates {(-3,-4)};
+        \addplot[plotinterpolated] coordinates {(4,2)};
+        \addplot[plotinterpolated] coordinates {(3,0)};
+    \end{axis}
+\end{tikzpicture}
+
+\end{multicols}
+
+\subsection{Nedostaci}
+
+\begin{definitionbox}
+    Funkcija $g(x)$ je reda $\mathcal{O}(h(x))$ za $x \to x_0$, odnosno
+    $$
+    g(x) = \mathcal{O}(h(x)), x\to x_0
+    $$
+    ako postoje konstante $\sigma, C$ takve da
+    $$
+    |x-x_0| \leq \sigma \Rightarrow |g(x)| \leq C|h(x)|
+    $$
+\end{definitionbox}
+
+\subsubsection{Veliki broj aritmetičkih operacija}
+
+Interpolacija lagrangeovim polinomom zahtjeva $\mathcal{O}(n^2)$ operacija kod prvog izvrjednjavanja i $\mathcal{O}(n)$ operacija za svako sljedeće izvrjednjavanje.
+
+Kod računalne primjene brzina izračuna ovisi u broju primjena dobivenog polinoma jer se unaprijed izračunata vandermondeova determinanta za sustav može primjeniti više puta dok je u slučaju lagrangeovih polinoma potrebno koristiti pokazivače na članove polinoma ($\mathrm{I}_n$, koji su parcijalno ispunjene funkcije na gomili) što npr. za crtanje funkcije \textbf{može zahtjevati veći broj dereferenciranja sa gomile}.
+
+Taj problem je rješiv korištenjem biblioteka za simboličku matematiku, no to povečava veličinu distribuirane binarne datoteke, iako je taj kompromis generalno ok ako se bibliteka koristi za pojednostavljivanje više izraza u toku izvođenja programa.
+
+\subsubsection{Velika zavisnost o ulaznim podacima}
+
+U slučaju izmjena ulaznih podataka (ponajviše x koordinata) je potrebno ponovo računati sve polinome interpolacije ($\mathrm{I}_n$).
+
+Kod računalne primjene, prethodno navedene parcijalno ispunjene funkcije (za $\mathrm{I}_n$) je potrebno ponovo slagati - \textbf{loša memoizacija}.
+
+\subsubsection{Slaba aproksimacija i oscilacije}
+
+Ako se odabere polinom preniskog supnja, on može \textbf{slabo aproksimirati originalnu funkciju}.
+
+\textbf{Rungeov fenomen}: Ako se odabere polinom previsokog stupnja, na djelovima se mogu pojaviti \textbf{prevelike oscilacije}, tj. greške na rubovima intervala aproksimacije.

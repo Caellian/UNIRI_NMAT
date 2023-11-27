@@ -1,0 +1,6 @@
+\numberwithin{equation}{section}
+
+% Define a custom label format for equations
+\NewDocumentCommand{\fancyeq}{ O{formula} O{\ref*{#3}} m }{%
+  \hyperref[#3]{#1~#2}%
+}

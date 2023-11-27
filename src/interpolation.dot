@@ -1,0 +1,10 @@
+digraph interpolation {
+interpolation [shape=diamond,label="Interpolacija"];
+lagrange [label="Lagrangeova"];
+lagrange_desc [shape=box,label="Interpolacija funckijskih\nvrijednosti jednom\nderivirane funkcije."];
+hermite [label="Hermiteova"];
+hermite_desc [shape=box,label="Interpolacija funckijskih\nvrijednosti jednom\nderivirane funkcije\ni njenih uzastopnih derivacija."];
+interpolation -> {lagrange, hermite};
+lagrange -> lagrange_desc[style=dotted,arrowhead=none];
+hermite -> hermite_desc[style=dotted,arrowhead=none];
+}

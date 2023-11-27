@@ -1,0 +1,119 @@
+\section{Greške}
+
+Greške su neizbježne, prilikom izračuna je cilj smanjiti njihov utjecaj na krajnji rezultat.
+
+\subsection{Vrste grešaka}
+
+\begin{itemize}
+    \item \textbf{Greška modela} nastaje zamjenom nekog složenog sustava ili procesa jednostavnijim.
+    \begin{itemize}
+        \item Neki sustavi su pre složeni da bi se opisali i rješili poznatim matematičkim alatima.
+        \item Primjer: otpor zraka u balistici
+    \end{itemize}
+    \item \textbf{Greška metode} nastaje zamjenom procesa (obično beskonačnog) konačnom aproksimacijom.
+    \begin{itemize}
+        \item Primjer: određivanje sume beskonačnog reda
+    \end{itemize}
+    \item \textbf{Greška diskretizacije} nastaje kada umjesto podataka koje nije moguće potpuno ispravno pohraniti ili predstaviti koristimo njima bliske podatke (aproksimacije).
+    \begin{itemize}
+        \item Primjeri:
+        \begin{itemize}
+            \item $\pi, e, \dots$
+            \item Zamjena kontinuuma konačnim diskretnim skupom
+            \item Zamjena beskonačno male veličine s malom, konkretnom veličinom
+        \end{itemize}
+    \end{itemize}
+    \item \textbf{Ulazna pogreška} nastaje zbog pogrešaka u ulaznim podacima nastalih prethodnom obradom podataka ili greškom mjerenja.
+    \begin{itemize}
+        \item Primjer: akceleracija sile teže.
+    \end{itemize}
+\end{itemize}
+
+Zaokruživanjem ili odbacivanjem decimala u prikazu broja a u računalu dobivamo aproksimaciju realnog broja (\textit{engl.} floating point approximation) od $a$ koju označavamo s fl$(a)$ i za koju vrijedi:
+
+$$
+\text{fl}(a) = a(1+\varepsilon)
+$$
+
+gdje je $\varepsilon$ \textbf{greška aproksimacija}.
+
+\newpage
+
+\subsection{Zapis realnog broja u računalu}
+
+Za zapis realnih brojeva se generalno koristi IEEE-754 standard.
+
+U IEEE-754 standardu su brojevi pohranjeni s tri komponente:
+
+\begin{center}
+    \begin{tabular}{|l|l|}
+        \hline
+        Ime&Opis\\
+        \hline
+        Predznak&\verb|1| ukoliko se radi o negativnom broju\\
+        Eksponent&eksponent na bazi pohranjenog broja\\
+        Mantisa/realni dio&decimalni dio realnog broja\\
+        \hline
+    \end{tabular}
+\end{center}
+
+Prilikom pohrane se podrazumjeva da matisa ima prefiksni bit \verb|1| koji se ne piše jer nema smisla pohraniti broj sa vodečim nulama.
+
+IEEE-754 navodi raspored bitova za realne brojeve različitih veličina. Predznak je uvijek veličine jednog bita, a ostali karakteristike su navedene u sljedećoj tablici:
+
+\begin{center}
+    \begin{tabular}{l|c|c|c|c|c}
+        Podatak&binary16&binary32&binary64&binary128&binary256\\
+        \hline
+        \hline
+        Eksponent&5b&8b&11b&15b&19b\\
+        Mantisa&10b&23b&52b&122b&236b\\
+        Ukupna veličina&16b&32b&64b&128b&256b\\
+        \hline
+        \hline
+        $ulp^*$&$2^{-11}$&$2^{-24}$&$2^{-53}$&$2^{-123}$&$2^{-237}$\\
+        \hline
+        \hline
+        $exp_{min}$&-14&-126&-1022&-16383&-262142\\
+        $exp_{max}$&+15&+127&+1023&+16384&+262143\\
+        \hline
+        \hline
+        $val_{min}$ (normalan)&$6.10\cdot10^{-5}$&$1.18\cdot10^{-38}$&$2.23\cdot10^{-308}$&$3.36\cdot10^{-4932}$&$2.48\cdot10^{-78913}$\\
+        $val_{min}$ (subnormalan$^{**}$)&$5.96\cdot10^{-8}$&$1.40\cdot10^{-45}$&$4.94\cdot10^{-324}$&$6.48\cdot10^{-4966}$&$2.25\cdot10^{-78984}$\\
+        $val_{max}$&65504&$3.40\cdot10^{38}$&$1.80\cdot10^{308}$&$1.19\cdot10^{4932}$&$1.61\cdot10^{78193}$\\
+    \end{tabular}
+\end{center}
+
+\begin{itemize}[label={}]
+    \item * \textbf{ulp}: jedinična strojna greška, također se zove i \textit{strojni epsilon}.
+    \item ** subnormalne IEEE-754 vrijendosti su spremljene manjom decimalnom preciznošću, tj. uz veču jediničnu strojnu grešku
+\end{itemize}
+
+\subsubsection{Posebne vrijednosti}
+
+IEEE-754 brojevi također imaju posebne vrijednosti kojima simboliziraju da se prilikom operacije dogodilo prekoračnje minimalne/maksimalne vrijednosti (\verb|+inf| i \verb|-inf|), te kada je provedena nevaljana operacija nad brojem \verb|NaN| poput djeljenja s nulom.
+
+\begin{center}
+    \begin{tabular}{ |c|c|c|c| } 
+        \hline
+        Ime &
+        \multicolumn{3}{|c|}{Binarni zapis}\\
+        \hline
+        \verb|+inf|&\verb|0|&\verb|1|\dots\verb|1|&\verb|0|\dots\verb|0|\\
+        \hline
+        \verb|-inf|&\verb|1|&\verb|1|\dots\verb|1|&\verb|0|\dots\verb|0|\\
+        \hline
+        \hline
+        \verb|NaN|&\verb|_|&\verb|1|\dots\verb|1|&\verb|_|\dots\verb|_|\\
+        \hline
+    \end{tabular}
+\end{center}
+
+Zbog toga što \verb|NaN| može biti predstavljen sa mnogo različitih binarnih kombinacija, jednačenje realnih brojeva na računalu nije smisleno rješivo. Različiti programski jezici se nose s tim problemom na različite načine:
+
+\begin{itemize}
+    \item tretiraju sve \verb|NaN| vrijednosti kao istu,
+    \item tretiraju svaku (čak i one čiji binarni zapisi se podudaraju) kao različitu,
+    \item bacaju grešku prilikom usporedbe,
+    \item imaju koncepte \textit{djelomično jednačivih/usporedivih} vrijednosti.
+\end{itemize}

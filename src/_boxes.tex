@@ -1,0 +1,90 @@
+
+\newtcolorbox{borderbox}[5][]{
+    enhanced,
+    breakable,
+    title=#3,
+    fonttitle=\sffamily\bfseries,
+    before skip=\baselineskip,
+    frame style={color=#4},
+    colback=#5,
+    overlay unbroken and first={
+        \node[anchor=north west,inner sep=2pt] at (title.north west) {\textcolor{#5}{#2}};
+    },
+    #1
+}
+
+\definecolor{colorexamplebg}{HTML}{DDF7F4}
+\definecolor{colorexamplefg}{HTML}{27B29F}
+
+\newcounter{examplecounter}[section]
+\NewDocumentEnvironment{examplebox}{ o +b }{
+    \refstepcounter{examplecounter} 
+    \IfValueTF{#1}
+        {\begin{borderbox}{\faPencil}{Primjer \theexamplecounter: #1}{colorexamplefg}{colorexamplebg}}
+        {\begin{borderbox}{\faPencil}{Primjer \theexamplecounter}{colorexamplefg}{colorexamplebg}}
+    #2
+}{
+    \end{borderbox}
+}
+
+\definecolor{colordefinitionbg}{HTML}{C5E0FC}
+\definecolor{colordefinitionfg}{HTML}{0E7EF1}
+
+\newcounter{definitioncounter}[section]
+\NewDocumentEnvironment{definitionbox}{ o +b }{
+    \refstepcounter{definitioncounter} 
+    \IfValueTF{#1}
+        {\begin{borderbox}{\faInfoCircle}{Definicija \thedefinitioncounter: #1}{colordefinitionfg}{colordefinitionbg}}
+        {\begin{borderbox}{\faInfoCircle}{Definicija \thedefinitioncounter}{colordefinitionfg}{colordefinitionbg}}
+    #2
+}{
+    \end{borderbox}
+}
+
+\newcounter{theoremcounter}[section]
+\NewDocumentEnvironment{theorembox}{ o +b }{
+    \refstepcounter{theoremcounter} 
+    \IfValueTF{#1}
+        {\begin{borderbox}{\faInfoCircle}{Teorem \thetheoremcounter: #1}{colordefinitionfg}{colordefinitionbg}}
+        {\begin{borderbox}{\faInfoCircle}{Teorem \thetheoremcounter}{colordefinitionfg}{colordefinitionbg}}
+    #2
+}{
+    \end{borderbox}
+}
+
+
+\definecolor{colorwarningbg}{HTML}{FCE7BE}
+\definecolor{colorwarningfg}{HTML}{F3A70C}
+
+\NewDocumentEnvironment{warningbox}{ o +b }{
+    \IfValueTF{#1}
+        {\begin{borderbox}{\faWarning}{Oprez: #1}{colorwarningfg}{colorwarningbg}}
+        {\begin{borderbox}{\faWarning}{Oprez}{colorwarningfg}{colorwarningbg}}
+    #2
+}{
+    \end{borderbox}
+}
+
+\definecolor{colortablebg}{HTML}{C3F9D5}
+\definecolor{colortablefg}{HTML}{14BE4D}
+
+\NewDocumentEnvironment{tablebox}{ o +b }{
+    \IfValueTF{#1}
+        {\begin{borderbox}{\faTable}{Tablica: #1}{colortablefg}{colortablebg}}
+        {\begin{borderbox}{\faTable}{Tablica}{colortablefg}{colortablebg}}
+    #2
+}{
+    \end{borderbox}
+}
+
+\definecolor{colorconditionbg}{HTML}{F2D0FC}
+\definecolor{colorconditionfg}{HTML}{BD0EF1}
+
+\NewDocumentEnvironment{conditionbox}{ o +b }{
+    \IfValueTF{#1}
+        {\begin{borderbox}{\faCheckCircle}{Uvjeti: #1}{colorconditionfg}{colorconditionbg}}
+        {\begin{borderbox}{\faCheckCircle}{Uvjeti}{colorconditionfg}{colorconditionbg}}
+    #2
+}{
+    \end{borderbox}
+}

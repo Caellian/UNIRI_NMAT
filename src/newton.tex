@@ -1,0 +1,265 @@
+
+\section{Newtonov interpolacijski polinom}
+
+Newtonov interpolacijski polinom rješava problem loše memoizacije koji lineariziranagrangeov polinom ima prilikom dodavanja interpoliranih točaka. Rješava to jer je definiran kao \textbf{rekurzivna funkcija} kojoj se \textbf{mogu pridodati članovi} kako bi aproksimacija davala točne vrijednosti za novonastali skup:
+
+\begin{equation}
+{\mathbf p}_n(x) \coloneq \mathbf{p}_{n-1}(x) + \mathbf{c}(x)
+\end{equation}
+
+${\mathbf c}(x)$ nazivamo korekcijom, i ona je polinom stupnja $n$, oblika:
+
+\begin{equation}
+{\mathbf c}(x) \coloneq {\mathbf a}_n\prod_{i=0}^{n-1}(x-x_i) = {\mathbf a}_n(x-x_0)(x-x_1)\dots(x-x_{n-1}).
+\end{equation}
+
+\subsection{Podijeljena razlika}
+
+$\mathbf{a}_n$ je funkcija čvorova $x_i,\space i=0, 1, \dots, n$ koju zovemo \textbf{podijeljena razlika $n$-tog reda} i označavamo:
+
+\begin{align*}
+\mathbf{a}_n &\coloneq f[x_0,\dots,x_n]\\
+\mathrm{a}_0 = f[x_0] &\coloneq f(x_0)
+\end{align*}
+
+Za \textit{dvije točke} ($x_0$,$f(x_0)$), ($x_1$,$f(x_1)$) definiramo i označavamo \textbf{podijeljenu razliku prvog reda funkcije} $f$ kao:
+
+$$
+f[x_0, x_1] = \frac{f(x_1)-f(x_0)}{x_1 - x_0} = \frac{f(x_0)}{x_0 - x_1} + \frac{f(x_1)}{x_1 - x_0}
+$$
+
+Za \textit{tri točke} ($x_0$,$f(x_0)$), ($x_1$,$f(x_1)$), ($x_2$,$f(x_2)$) uvodimo \textbf{podjeljenu razliku drugog reda funkcije} $f$ kao:
+
+\begin{gather*}
+    f[x_0, x_1, x_2] = \frac{f[x_2,x_1]-f[x_1,x_0]}{x_2 - x_0} = \frac{\displaystyle\frac{f(x_2)}{x_2 - x_1}-\frac{f(x_1)}{x_2 - x_1}}{x_2 - x_0}-\frac{\displaystyle\frac{f(x_1)}{x_1 - x_0}-\frac{f(x_0)}{x_1 - x_0}}{x_2 - x_0}\\\\
+    = \frac{f(x_2)}{(x_2-x_0)(x_2-x_1)}-\frac{f(x_1)}{(x_2-x_0)(x_2-x_1)}-\frac{f(x_1)}{(x_2-x_0)(x_1-x_0)}+\frac{f(x_0)}{(x_2-x_0)(x_1-x_0)}\\
+    = \frac{f(x_0)}{(x_2-x_0)(x_1-x_0)}-\frac{f(x_1)(x_1-x_0)+f(x_1)(x_2-x_1)}{(x_2-x_0)(x_1-x_0)(x_2-x_1)}+\frac{f(x_2)}{(x_2-x_0)(x_2-x_1)}\\
+    = \frac{f(x_0)}{(x_2-x_0)(x_1-x_0)}-\frac{f(x_1)(\cancel{x_1}-x_0+x_2\cancel{-x_1})}{(x_2-x_0)(x_1-x_0)(x_2-x_1)}+\frac{f(x_2)}{(x_2-x_0)(x_2-x_1)}\\
+    = \frac{f(x_0)}{(x_2-x_0)(x_1-x_0)}-\frac{f(x_1)\cancel{(x_2-x_0)}}{\cancel{(x_2-x_0)}(x_1-x_0)(x_2-x_1)}+\frac{f(x_2)}{(x_2-x_0)(x_2-x_1)}\\
+    = \frac{f(x_0)}{(x_2-x_0)(x_1-x_0)}-\frac{f(x_1)}{(x_1-x_0)(x_2-x_1)}+\frac{f(x_2)}{(x_2-x_0)(x_2-x_1)}\\
+    = \frac{f(x_0)}{(x_2-x_0)(x_1-x_0)}\cancel{-}\frac{f(x_1)}{(x_1-x_0)\cdot\cancel{-1}\cdot(x_1-x_2)}+\frac{f(x_2)}{(x_2-x_0)(x_2-x_1)}\\\\
+    \boxed{
+    = \frac{f(x_0)}{(x_0-x_1)(x_0-x_2)}+\frac{f(x_1)}{(x_1-x_0)(x_1-x_2)}+\frac{f(x_2)}{(x_2-x_0)(x_2-x_1)}
+    }
+\end{gather*}
+
+\newpage
+
+Zbog pojednostavljivanja rekurzivnog izračuna je poželjno zapisati podjeljene razlike u obliku tablice:
+
+\begin{tablebox}[podjeljene razlike]
+    $$
+    \begin{array}{ccccccc}
+        x_0 & f[x_0] \\
+        & & f[x_0, x_1] \\
+        x_1 & f[x_1] & & f[x_0, x_1, x_2] \\
+        & & f[x_1, x_2] & & f[x_0, x_1, x_2, x_3] \\
+        x_2 & f[x_2] & & f[x_1, x_2, x_3] & \vdots \\
+        & & f[x_2, x_3] & \vdots & & \cdots & f[x_0, x_1, \dots, x_n] \\
+        x_3 & f[x_3] & \vdots \\
+        \vdots & \vdots & & f[x_{n-2}, x_{n-1}, x_n] \\
+        & & f[x_{n-1}, x_n] \\
+        x_n & f[x_n] \\
+    \end{array}
+    $$
+\end{tablebox}
+
+Općenita rekurzivna relacija koja vrijedi za podijeljene razlike je:
+
+$$
+f[x_0, x_1, \dots, x_n] = \frac{f[x_1, \dots, x_n]- f[x_0, \dots, x_{n-1}]}{x_n - x_0}
+$$
+
+Indukcijom iz rekurzivne relacije izvodimo \textbf{lineariziran oblik za podijeljenu razliku $n$-tog reda} koji nije rekurzivan:
+
+$$
+f[x_a, \dots, x_b] = \sum_{i=a}^{b} \frac{f(x_i)}{\prod_{\substack{j=a\\j\neq i}}^b(x_i - x_j)},\qquad a>0,\qquad b>a
+$$
+
+Taj oblik je praktičan za primjenu prilikom ručnog izračuna jer ne zahtjeva rekurzivno raspisivanje svih članova.
+
+Iz toga također slijedi sažeti zapis newtonovog polinoma:
+
+$$
+p_n(x) = \sum_{i=1}^{n}\left[\left(\sum_{j=0}^{i} \frac{f(x_j)}{\prod_{\substack{k=0\\k\neq j}}^i(x_j - x_k)}\right)\prod_{j=0}^{i-1}(x-x_j)\right]
+$$
+
+Ovaj zapis je malo manje praktičan, no daje potpun uvid u polinom.
+
+\begin{warningbox}[međupohrana]
+    Direktan izračun gubi prednost međupohrane djelomičnih rezultata koji se mogu ponovo uporabiti prilikom dodavanja interpoliranih točaka.
+
+    Kod računalnog izračuna ima smisla pohraniti rezultate podijeljenih razlika ($f[\dots]$) u međuspremnik te po potrebi izračunati vrijednost polinoma $p_n$ s njima.
+\end{warningbox}
+
+\newpage
+
+\subsection{Ekvidistantni čvorovi}
+
+U slučaju jednako udaljenih (ekvidistantnih) čvorova je podjeljena razlika jednostavnija za zapisati te se zove \textbf{konačna razlika}.
+
+Ekvidistantne čvorove možemo zapisati u obliku:
+
+$$
+x_{i+1}=x_i+h,\qquad i\in[0,n\rangle
+$$
+
+gdje je $h$ konstantan razmak (korak) između dva susjedna čvora.
+
+Konačna razlika je oblika:
+
+\begin{align}
+\label{kon_razl}
+\Delta^kf(x_i) &\coloneq \Delta^{k-1}f(x_{i+1}) - \Delta^{k-1}f(x_i),\qquad k\in\langle0,n]\\\nonumber\\
+\Delta^0f(x_i) &\coloneq f(x_i)\nonumber
+\end{align}
+
+\begin{tablebox}[konačne razlike]
+    $$
+    \begin{array}{ccccccc}
+        x_0 & f(x_0) \\
+        & & \Delta f(x_0) \\
+        x_1 & f(x_1) & & \Delta^2 f(x_0) \\
+        & & \Delta f(x_1) & & \Delta^3 f(x_0) \\
+        x_2 & f(x_2) & & \Delta^2 f(x_1) & \vdots \\
+        & & \Delta f(x_2) & \vdots & & \cdots & \Delta^n f(x_0) \\
+        x_3 & f(x_3) & \vdots \\
+        \vdots & \vdots & & \Delta^2 f(x_{n-2}) \\
+        & & \Delta f(x_{n-1}) \\
+        x_n & f(x_n) \\
+    \end{array}
+    $$
+\end{tablebox}
+
+Vrijedi \textbf{lema o vezi podijeljenih i konačnih razlika}:
+
+$$
+f[x_0,x_1,\dots,x_n] = \frac{\Delta^nf(x_0)}{n!h^n},\qquad x_{i+1_-x}i=h,\qquad i\in [0,n\rangle
+$$
+
+Zbog leme o vezi razlika, tablica konačnih razlika izgleda identično tablici podijeljenih razlika.
+
+Newtonov oblik interpolacijskog polinoma na ekvidistantnim čvorovima je:
+
+\begin{align}
+p_n(x) =& \sum_{i=1}^{n}\left(\frac{\Delta^if(x_0)}{i!h^i}\prod_{j=0}^{i-1}x-x_j\right)\\\nonumber\\
+=&f(x_0)
++\frac{\Delta f(x_0)}{1!h}(x-x_0)
++\frac{\Delta^2 f(x_0)}{2!h^2}(x-x_0)(x-x_1)
++\dots
++\frac{\Delta^n f(x_0)}{n!h^n}(x-x_0)\dots(x-x_{n-1})\nonumber
+\end{align}
+
+\newpage
+
+\begin{examplebox}
+    Funkciju $f(x)=sin(\pi x)$ na segmentu [0, 1] aproksimirati interpolacijskim polinomom koji prolazi sljedećim točkama:
+
+    \center
+    \begin{tabular}{r|c|c|c|c|c}
+        $x$ & 0 & 0.25 & 0.5 & 0.75 & 1\\
+        \hline
+        $f(x)$ & 0 & 0.7071 & 1 & 0.7071 & 0
+    \end{tabular}
+\end{examplebox}
+
+S obzirom da su zadane točke sve podjednako udaljene ($h=0.25$), možemo koristiti newtonovu interpolaciju za ekvidistantne točke:
+
+\begin{align*}
+p_4(x) =& f(x_0) + \frac{\Delta^1f(x_0)}{1!h^1}(x-x_0) + \frac{\Delta^2f(x_0)}{2!h^2}(x-x_0)(x-x_1)+\\
+&\frac{\Delta^3f(x_0)}{3!h^3}(x-x_0)(x-x_1)(x-x_2)+\frac{\Delta^4f(x_0)}{4!h^4}(x-x_0)(x-x_1)(x-x_2)(x-x_3)
+\end{align*}
+
+Popunjavamo tablicu konačnih razlika prema formuli \ref{kon_razl}:
+
+$$
+\begin{array}{cccccc}
+    0 & 0 \\
+    & & \Delta f(x_0) = 0.7071 \\
+    0.25 & 0.7071 & & \Delta^2 f(x_0) = -0.4142 \\
+    & & \Delta f(x_1) = 0.2929 & & \Delta^3 f(x_0) = -0.1716 \\
+    0.5 & 1 & & \Delta^2 f(x_1) = -0.5858 & & \Delta^4 f(x_0) = 0.3432 \\
+    & & \Delta f(x_2) = -0.2929 & & \Delta^3 f(x_1) = 0.1716 \\
+    0.75 & 0.7071 & & \Delta^2 f(x_1) = -0.4142 \\
+    & & \Delta f(x_0) = -0.7071 \\
+    1 & 0 \\
+\end{array}
+$$
+
+Nakon što smo odredili sve konačne razlike, možemo ih uvrstiti u prethodnu formulu:
+
+\begin{align*}
+p_4(x) =& 0 + \frac{0.7071}{1!\cdot0.25^1}(x-0) + \frac{-0.4142}{2!\cdot0.25^2}(x-0)(x-0.25)
++\frac{-0.1716}{3!\cdot0.25^3}(x-0)(x-0.25)(x-0.5)\\
+&+\frac{0.3432}{4!\cdot0.25^4}(x-0)(x-0.25)(x-0.5)(x-0.75)\\
+=&2.8284x − 3.3136x(x − 0.25) − 1.8304x(x − 0.25)(x − 0.5) + 3.6608x(x − 0.25)(x − 0.5)(x − 0.75)\\
+=&3.6608x^4 - 7.3216x^3 + 0.576x^2 + 3.0848x
+\end{align*}
+
+\begin{tikzpicture}
+    \begin{axis}[
+        domain=-3:4,
+        ymin=-1.5,ymax=2,
+        ]
+        \addplot[plotlinefound] expression[domain=-1:2,samples=100]{3.6608*\x^4 - 7.3216*\x^3 + 0.576*\x^2 + 3.0848*\x} 
+                    node[pos=0.325,anchor=south east]{$p_4(x)$};
+        \addplot[plotlinetarget] expression[samples=100]{sin(deg(pi*\x))} 
+                    node[pos=0.2,anchor=east]{$f(x)$};
+        \addplot[plotinterpolated] coordinates {(0,0)};
+        \addplot[plotinterpolated] coordinates {(0.25,0.7071)};
+        \addplot[plotinterpolated] coordinates {(0.5,1)};
+        \addplot[plotinterpolated] coordinates {(0.75,0.7071)};
+        \addplot[plotinterpolated] coordinates {(1,0)};
+    \end{axis}
+\end{tikzpicture}
+
+\newpage
+
+\subsection{Ocjena greške lagrangeovog i newtonovog interpolacijskog polinoma}
+
+Pod pretpostavkom da za svaki $f(x)$ postoji $f^{(n+1)}(x)$, gdje je $x \in [x_0,x_n]$ za neki $n\in\mathbb{N}_0$, i da su čvorovi interpolacijskog polinoma $p_n(x)$ za funkciju $f(x)$. Tada za svaki $x\in[x_0,x_n]$ postoji $\xi\in[x_0,x_n]$ takav da vrijedi:
+
+$$
+e(x) = f(x) - p_n(x) = \frac{\omega(x)}{(n + 1)!}f^{(n+1)}(\xi)
+$$
+
+Ako postoji $\mathrm{M}_{n+1} = \max_{x\in[x_0,x_n]}\left|f^{(n+1)}(x)\right|$, tada je globalna ocjena greške:
+
+$$
+|e(x)| = |f(x) - p_n(x)| \leq \frac{|\omega(x)|}{(n+1)!}\mathrm{M}_{n+1}
+$$
+
+\begin{examplebox}
+    Odrediti grešku newtonovog interpolacijskog polinoma iz prethodnog zadatka u točki $x=0.6$ te odrediti globalnu ocjenu greške funkcije na zadanom segmentu.
+\end{examplebox}
+
+Koristeći interpolacijski polinom iz prethodnog zadatka dobivamo $p_4(0.6) = 0.95121$ dok je $f(0.6) = 0.95105$. Uvrštavanjem u formulu za absolutnu pogrešku dobivamo:
+
+$$
+|f(0.6)-p_4(0.6)| = 1.53483\cdot10^{-4}
+$$
+
+Prema teoremu o ocjeni lagrangeovog/newtonovog polinoma dobivamo:
+
+\begin{gather}
+|f(x)-p_4(x)| \leq \frac{\pi^5}{5!}|x(x-0.25)(x-0.5)(x-0.75)(x-1)|\\
+\mathrm{M}_5=\max_{x\in[0,1]}(\sin(\pi x))^{(5)}
+\end{gather}
+
+Odnosno preciznije, jer vrijedi $\sin(\pi x)^{(5)} = \pi^5\cos(\pi x)$, $\mathrm{M}_5$ je:
+
+$$
+\mathrm{M}_5 = \max_{x\in[0,1]}\left|\pi^5\cos(\pi x)\right|
+$$
+
+Na intervalu $[0,1], \cos(\pi x)$ zauzima najveću vrijednost ($1$) za $x=0$ te time slijedi:
+
+$$
+\mathrm{M}_5 = \left|\pi^5\cos(\pi \cdot 0)\right| = \left|\pi^5\cdot1\right| = \pi^5
+$$
+
+\subsection{Nedostaci}
+
+Newtonova interpolacija pati od istog nedostatka kao i lagrangeova gdje se s večim brojem interpoliranih točaka pojavljuju sve veče \textbf{oscilacija na rubovima interpoliranih točaka}.
+
+Složenost newtonovog polinoma je ista lagrangeovom, no naknadne izmjene u praktičnoj primjeni zahtjevaju znatno manji broj ponovnih izračuna.
