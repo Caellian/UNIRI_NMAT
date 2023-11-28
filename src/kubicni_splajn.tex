@@ -1,9 +1,9 @@
 
-\section{Kubični interpolacijski spline}
+\section{Kubični interpolacijski splajn}
 
-Kako bi se izbjegao prethodno navedeni problem, poželjno je konstruirati spline višeg reda.
-\textbf{Kvadratni spline} može imati skokove prve derivacije u točkama mreže čvorova pa se on ne primjenjuje toliko često.
-\textbf{Kubični spline} se iznimno često koristi u praksi te nema prethodno navedene nedostatke.
+Kako bi se izbjegao navedeni problem s tranzicijom između segmenata, poželjno je konstruirati splajn višeg reda.
+\textbf{Kvadratni splajn} može imati skokove prve derivacije u točkama mreže čvorova pa se on ne primjenjuje toliko često.
+\textbf{Kubični splajn} se iznimno često koristi u praksi te nema nedostatke koje imaju linearni i kvadratni splajn.
 
 Kada imamo zadane diskretne vrijednosti funkcije:
 
@@ -17,7 +17,7 @@ $$
 a\leq x_0 < x_1 < \dots < x_n \leq b
 $$
 
-Kubični spline je funkcija $s(x)\in\mathcal{C}^2(\langle x_0,x_n\rangle)$ koja je:
+Kubični splajn je funkcija $s(x)\in\mathcal{C}^2(\langle x_0,x_n\rangle)$ koja je:
 
 \begin{itemize}
     \item na svakom podintervalu $[x_i, x_{i+1}\rangle, i\in[0,n\rangle$ polinom najviše trećeg stupnja,
@@ -37,7 +37,7 @@ $$
 p_i(x)=a_0+a_1(x-x_i)+a_2(x-x_i)^2+a_3(x-x_i)^3
 $$
 
-\begin{conditionbox}[određivanje koeficijenata kubičnog splinea]
+\begin{conditionbox}[određivanje koeficijenata kubičnog splajna]
     \begin{align}
         p_0(x_0) =& y_0\nonumber\\
         \label{cs_continuation}
@@ -59,7 +59,7 @@ $$
         \item Uvjet \ref{cs_slope} osigurava da je nagib interpolacije na rubovima segmenata jednak nagibu funkcije.
     \end{itemize}
 
-    \ref{cs_slope} je jedan on različih načina za zadati dodatne uvijete kako bi dobili jedinstvena rješenja kubičnog splinea, tj. moguće je postići jedinstvenost rješenja i na druge načine.
+    \ref{cs_slope} je jedan on različitih načina za zadati dodatne uvijete kako bi dobili jedinstvena rješenja kubičnog splajna, tj. moguće je postići jedinstvenost rješenja i na druge načine.
 \end{conditionbox}
 
 \newpage
@@ -112,21 +112,21 @@ $$
 h_is_{i-1}+2(h_{i-1}+h_i)s_i+h_{i-1}s_{i+1}=3(h_if[x_{i-1},x_i]+h_{i-1}f[x_i,x_{i+1}]),\qquad i\in[1,n-1]
 $$
 
-Dobiveni sustav je sastavljen od $n-1$ jednadžbi s $n-1$ nepoznanica i strogo je dijagonalno dominantan po retcima pa zaključujemo da je determinanta sustava različita od 0, odnosno sustav ima jedinstveno rješenje $\{s_1,\dots,s_{n-1}\}$ čime je potpuno određen kubični spline.
+Dobiveni sustav je sastavljen od $n-1$ jednadžbi s $n-1$ nepoznanica i strogo je dijagonalno dominantan po redcima pa zaključujemo da je determinanta sustava različita od 0, odnosno sustav ima jedinstveno rješenje $\{s_1,\dots,s_{n-1}\}$ čime je potpuno određen kubični splajn.
 
 \subsection{Druga derivacija na rubu segmenta}
 
 \begin{conditionbox}[druga derivacija ruba]
-    Kao što je prethodno navedeno uvjet \ref{cs_slope} nije jedini način za postizanje jedinstvenih rješenja. Možemo ih postići i sa:
+    Kao što je prethodno navedeno uvjet \ref{cs_slope} nije jedini način za postizanje jedinstvenih rješenja. Možemo ih postići i s:
     \begin{align}
         \phi''_0=&f''(x_0)\nonumber\\
         \label{cs_sd}
         \phi''_n=&f''(x_n)
     \end{align}
-    Ovdje uvijet \ref{cs_sd} osigurava da je stopa promjene nagiba ("savijenost") na rubovima interpoliranih segmenata jednaka nagibu funkcije.
+    Ovdje uvjet \ref{cs_sd} osigurava da je stopa promjene nagiba ("savijenost") na rubovima interpoliranih segmenata jednaka nagibu funkcije.
 \end{conditionbox}
 
-Uvijeti \ref{cs_continuation}, \ref{cs_continuation_fd}, \ref{cs_continuation_sd} i \ref{cs_sd} dovode do linearnog sustava od $n+1$ jednadžbe s $n+1$ nepoznanicom, odnosno
+Uvjeti \ref{cs_continuation}, \ref{cs_continuation_fd}, \ref{cs_continuation_sd} i \ref{cs_sd} dovode do linearnog sustava od $n+1$ jednadžbe s $n+1$ nepoznanicom, odnosno
 
 \begin{align*}
 p''_1(x_0) =& f''(x_0)\\
@@ -134,7 +134,7 @@ h_is_{i-1}+2(h_{i-1}+h_i)s_i+h_{i-1}s_{i+1}=&3(h_if[x_{i-1},x_i]+h_{i-1}f[x_i,x_
 p''_n(x_n) =& f''(x_n)
 \end{align*}
 
-Dobiveni sustav je dijagonalno dominantan po retcima pa postoji jedinstveno rješenje sustava $\{s_0,\dots,s_n\}$. Funkcija $\phi(x)$ je klase $\mathcal{C}^2[a,b]$. Ako funkcija $f(x)$ ima omeđenu četvrtu derivaciju, tada vrijedi
+Dobiveni sustav je dijagonalno dominantan po redcima pa postoji jedinstveno rješenje sustava $\{s_0,\dots,s_n\}$. Funkcija $\phi(x)$ je klase $\mathcal{C}^2[a,b]$. Ako funkcija $f(x)$ ima omeđenu četvrtu derivaciju, tada vrijedi
 
 $$
 f(x)=\phi(x) + \mathcal(O)(h^4),\qquad h\to0.
@@ -142,8 +142,8 @@ $$
 
 \newpage
 
-\begin{examplebox}[uporaba kubičnog splinea]
-    Primjenom kubičnog splinea odrediti $\phi(2.33)$ i $\phi(4.21)$ ako su zadani podaci:
+\begin{examplebox}[uporaba kubičnog splajna]
+    Primjenom kubičnog splajna odrediti $\phi(2.33)$ i $\phi(4.21)$ ako su zadani podaci:
     
     \center
     \begin{tabular}{r|c|c|c|c|c}
@@ -157,7 +157,7 @@ $$
 
 U zadanoj tablici vrijedi $s_i=f'(x_i)$. Traženi polinomi su oblika $p_i(x)=\sum_{k=0}^3a_k(x-x_i)^k$ pa prema sljedećem određujemo vrijednosti koeficijenata $a_0$, $a_1$, $a_2$, $a_3$ za svaki podsegment posebno.
 
-Tablica podjeljenih razlika je
+Tablica podijeljenih razlika je
 
 $$
 \begin{array}{ccc}
@@ -228,9 +228,9 @@ Konačno, $\Phi(2.33)=p_2(2.33)=0.4286$.
 
 \newpage
 
-\subsection{Greška kubičnog splinea}
+\subsection{Greška kubičnog splajna}
 
-Za kubični spline ocjena greške je
+Za kubični splajn ocjena greške je
 
 \begin{align}
 |f(x)-\phi(x)|\leq&\frac{\text{M}_4}{4!}\frac{h^4}{16}={1\over384}h^4\text{M}_4,\\
@@ -238,4 +238,4 @@ Za kubični spline ocjena greške je
 h=&\max_{i\in[1,n]}h_i,\qquad h_i=x_{i+1}-x_i.
 \end{align}
 
-Drugim rječima, ravnomjernim povečavanjem čvorova kubičnog splinea tako da $h\to0$, maksimalna greška te interpolacije se približava 0.
+Drugim rjećima, ravnomjernim povećavanjem čvorova kubičnog splajna tako da $h\to0$, maksimalna greška te interpolacije se približava 0.

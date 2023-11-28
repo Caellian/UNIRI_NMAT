@@ -1,7 +1,7 @@
 
 \section{Newtonov interpolacijski polinom}
 
-Newtonov interpolacijski polinom rješava problem loše memoizacije koji lineariziranagrangeov polinom ima prilikom dodavanja interpoliranih točaka. Rješava to jer je definiran kao \textbf{rekurzivna funkcija} kojoj se \textbf{mogu pridodati članovi} kako bi aproksimacija davala točne vrijednosti za novonastali skup:
+Newtonov interpolacijski polinom rješava problem loše memoizacije koji lagrangeov polinom ima prilikom dodavanja interpoliranih točaka. Rješava to jer je definiran kao \textbf{rekurzivna funkcija} kojoj se \textbf{mogu pridodati članovi} kako bi aproksimacija davala točne vrijednosti za novonastali skup:
 
 \begin{equation}
 {\mathbf p}_n(x) \coloneq \mathbf{p}_{n-1}(x) + \mathbf{c}(x)
@@ -28,7 +28,7 @@ $$
 f[x_0, x_1] = \frac{f(x_1)-f(x_0)}{x_1 - x_0} = \frac{f(x_0)}{x_0 - x_1} + \frac{f(x_1)}{x_1 - x_0}
 $$
 
-Za \textit{tri točke} ($x_0$,$f(x_0)$), ($x_1$,$f(x_1)$), ($x_2$,$f(x_2)$) uvodimo \textbf{podjeljenu razliku drugog reda funkcije} $f$ kao:
+Za \textit{tri točke} ($x_0$,$f(x_0)$), ($x_1$,$f(x_1)$), ($x_2$,$f(x_2)$) uvodimo \textbf{podijeljenu razliku drugog reda funkcije} $f$ kao:
 
 \begin{gather*}
     f[x_0, x_1, x_2] = \frac{f[x_2,x_1]-f[x_1,x_0]}{x_2 - x_0} = \frac{\displaystyle\frac{f(x_2)}{x_2 - x_1}-\frac{f(x_1)}{x_2 - x_1}}{x_2 - x_0}-\frac{\displaystyle\frac{f(x_1)}{x_1 - x_0}-\frac{f(x_0)}{x_1 - x_0}}{x_2 - x_0}\\\\
@@ -45,9 +45,9 @@ Za \textit{tri točke} ($x_0$,$f(x_0)$), ($x_1$,$f(x_1)$), ($x_2$,$f(x_2)$) uvod
 
 \newpage
 
-Zbog pojednostavljivanja rekurzivnog izračuna je poželjno zapisati podjeljene razlike u obliku tablice:
+Zbog pojednostavljivanja rekurzivnog izračuna je poželjno zapisati podijeljene razlike u obliku tablice:
 
-\begin{tablebox}[podjeljene razlike]
+\begin{tablebox}[podijeljene razlike]
     $$
     \begin{array}{ccccccc}
         x_0 & f[x_0] \\
@@ -76,7 +76,7 @@ $$
 f[x_a, \dots, x_b] = \sum_{i=a}^{b} \frac{f(x_i)}{\prod_{\substack{j=a\\j\neq i}}^b(x_i - x_j)},\qquad a>0,\qquad b>a
 $$
 
-Taj oblik je praktičan za primjenu prilikom ručnog izračuna jer ne zahtjeva rekurzivno raspisivanje svih članova.
+Taj oblik je praktičan za primjenu prilikom ručnog izračuna jer ne zahtijeva rekurzivno raspisivanje svih članova.
 
 Iz toga također slijedi sažeti zapis newtonovog polinoma:
 
@@ -96,7 +96,7 @@ Ovaj zapis je malo manje praktičan, no daje potpun uvid u polinom.
 
 \subsection{Ekvidistantni čvorovi}
 
-U slučaju jednako udaljenih (ekvidistantnih) čvorova je podjeljena razlika jednostavnija za zapisati te se zove \textbf{konačna razlika}.
+U slučaju jednako udaljenih (ekvidistantnih) čvorova je podijeljena razlika jednostavnija za zapisati te se zove \textbf{konačna razlika}.
 
 Ekvidistantne čvorove možemo zapisati u obliku:
 
@@ -163,7 +163,7 @@ p_n(x) =& \sum_{i=1}^{n}\left(\frac{\Delta^if(x_0)}{i!h^i}\prod_{j=0}^{i-1}x-x_j
     \end{tabular}
 \end{examplebox}
 
-S obzirom da su zadane točke sve podjednako udaljene ($h=0.25$), možemo koristiti newtonovu interpolaciju za ekvidistantne točke:
+S obzirom na to da su zadane točke sve podjednako udaljene ($h=0.25$), možemo koristiti newtonovu interpolaciju za ekvidistantne točke:
 
 \begin{align*}
 p_4(x) =& f(x_0) + \frac{\Delta^1f(x_0)}{1!h^1}(x-x_0) + \frac{\Delta^2f(x_0)}{2!h^2}(x-x_0)(x-x_1)+\\
@@ -233,7 +233,7 @@ $$
     Odrediti grešku newtonovog interpolacijskog polinoma iz prethodnog zadatka u točki $x=0.6$ te odrediti globalnu ocjenu greške funkcije na zadanom segmentu.
 \end{examplebox}
 
-Koristeći interpolacijski polinom iz prethodnog zadatka dobivamo $p_4(0.6) = 0.95121$ dok je $f(0.6) = 0.95105$. Uvrštavanjem u formulu za absolutnu pogrešku dobivamo:
+Koristeći interpolacijski polinom iz prethodnog zadatka dobivamo $p_4(0.6) = 0.95121$ dok je $f(0.6) = 0.95105$. Uvrštavanjem u formulu za apsolutnu pogrešku dobivamo:
 
 $$
 |f(0.6)-p_4(0.6)| = 1.53483\cdot10^{-4}
@@ -260,6 +260,6 @@ $$
 
 \subsection{Nedostaci}
 
-Newtonova interpolacija pati od istog nedostatka kao i lagrangeova gdje se s večim brojem interpoliranih točaka pojavljuju sve veče \textbf{oscilacija na rubovima interpoliranih točaka}.
+Newtonova interpolacija pati od istog nedostatka kao i lagrangeova gdje se s većim brojem interpoliranih točaka pojavljuju sve veče \textbf{oscilacija na rubovima interpoliranih točaka}.
 
-Složenost newtonovog polinoma je ista lagrangeovom, no naknadne izmjene u praktičnoj primjeni zahtjevaju znatno manji broj ponovnih izračuna.
+Složenost newtonovog polinoma je ista lagrangeovom, no naknadne izmjene u praktičnoj primjeni zahtijevaju znatno manji broj ponovnih izračuna.

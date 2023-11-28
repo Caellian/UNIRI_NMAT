@@ -7,7 +7,7 @@ Greške su neizbježne, prilikom izračuna je cilj smanjiti njihov utjecaj na kr
 \begin{itemize}
     \item \textbf{Greška modela} nastaje zamjenom nekog složenog sustava ili procesa jednostavnijim.
     \begin{itemize}
-        \item Neki sustavi su pre složeni da bi se opisali i rješili poznatim matematičkim alatima.
+        \item Neki sustavi su pre složeni da bi se opisali i riješili poznatim matematičkim alatima.
         \item Primjer: otpor zraka u balistici
     \end{itemize}
     \item \textbf{Greška metode} nastaje zamjenom procesa (obično beskonačnog) konačnom aproksimacijom.
@@ -50,14 +50,14 @@ U IEEE-754 standardu su brojevi pohranjeni s tri komponente:
         \hline
         Ime&Opis\\
         \hline
-        Predznak&\verb|1| ukoliko se radi o negativnom broju\\
+        Predznak&\verb|1| ako se radi o negativnom broju\\
         Eksponent&eksponent na bazi pohranjenog broja\\
         Mantisa/realni dio&decimalni dio realnog broja\\
         \hline
     \end{tabular}
 \end{center}
 
-Prilikom pohrane se podrazumjeva da matisa ima prefiksni bit \verb|1| koji se ne piše jer nema smisla pohraniti broj sa vodečim nulama.
+Prilikom pohrane se podrazumijeva da mantisa ima prefiksni bit \verb|1| koji se ne piše jer nema smisla pohraniti broj s vodećim nulama.
 
 IEEE-754 navodi raspored bitova za realne brojeve različitih veličina. Predznak je uvijek veličine jednog bita, a ostali karakteristike su navedene u sljedećoj tablici:
 
@@ -86,12 +86,12 @@ IEEE-754 navodi raspored bitova za realne brojeve različitih veličina. Predzna
 
 \begin{itemize}[label={}]
     \item * \textbf{ulp}: jedinična strojna greška, također se zove i \textit{strojni epsilon}.
-    \item ** subnormalne IEEE-754 vrijendosti su spremljene manjom decimalnom preciznošću, tj. uz veču jediničnu strojnu grešku
+    \item ** subnormalne IEEE-754 vrijednosti su spremljene manjom decimalnom preciznošću, tj. uz veću jediničnu strojnu grešku
 \end{itemize}
 
 \subsubsection{Posebne vrijednosti}
 
-IEEE-754 brojevi također imaju posebne vrijednosti kojima simboliziraju da se prilikom operacije dogodilo prekoračnje minimalne/maksimalne vrijednosti (\verb|+inf| i \verb|-inf|), te kada je provedena nevaljana operacija nad brojem \verb|NaN| poput djeljenja s nulom.
+IEEE-754 brojevi također imaju posebne vrijednosti kojima simboliziraju da se prilikom operacije dogodilo prekoračenje minimalne/maksimalne vrijednosti (\verb|+inf| i \verb|-inf|), te kada je provedena nevaljana operacija nad brojem \verb|NaN| poput dijeljenja s nulom.
 
 \begin{center}
     \begin{tabular}{ |c|c|c|c| } 
@@ -109,7 +109,7 @@ IEEE-754 brojevi također imaju posebne vrijednosti kojima simboliziraju da se p
     \end{tabular}
 \end{center}
 
-Zbog toga što \verb|NaN| može biti predstavljen sa mnogo različitih binarnih kombinacija, jednačenje realnih brojeva na računalu nije smisleno rješivo. Različiti programski jezici se nose s tim problemom na različite načine:
+Zbog toga što \verb|NaN| može biti predstavljen s mnogo različitih binarnih kombinacija, jednačenje realnih brojeva na računalu nije smisleno rješivo. Različiti programski jezici se nose s tim problemom na različite načine:
 
 \begin{itemize}
     \item tretiraju sve \verb|NaN| vrijednosti kao istu,

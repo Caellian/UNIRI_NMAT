@@ -8,7 +8,7 @@ Formula za Lagrangeov interpolacijski polinom (${\mathbf L}_n$) je:
 \end{align}
 
 Lagrangeov interpolacijski polinom je bolji od korištenja vandermondeove determinante jer su sustavi dobiveni vandermondeovom determinantom nestabilni.
-Također je i postupak brži jer ne zahtjeva računanje inverzne matrice koja u računalnoj primjeni zahtjeva mnogo međukoraka i instrukcija.
+Također je i postupak brži jer ne zahtijeva računanje inverzne matrice koja u računalnoj primjeni zahtijeva mnogo međukoraka i instrukcija.
 
 \begin{examplebox}[uporaba lagrangeovog polinoma]
     Odredi interpolacijski polinom koristeći lagrangeove polinome ako su zadane sljedeće točke:
@@ -87,11 +87,11 @@ Nakon uvrštavanja dobivamo polinom:
 
 \subsubsection{Veliki broj aritmetičkih operacija}
 
-Interpolacija lagrangeovim polinomom zahtjeva $\mathcal{O}(n^2)$ operacija kod prvog izvrjednjavanja i $\mathcal{O}(n)$ operacija za svako sljedeće izvrjednjavanje.
+Interpolacija lagrangeovim polinomom zahtijeva $\mathcal{O}(n^2)$ operacija kod prvog izvrednjavanja i $\mathcal{O}(n)$ operacija za svako sljedeće izvrednjavanje.
 
-Kod računalne primjene brzina izračuna ovisi u broju primjena dobivenog polinoma jer se unaprijed izračunata vandermondeova determinanta za sustav može primjeniti više puta dok je u slučaju lagrangeovih polinoma potrebno koristiti pokazivače na članove polinoma ($\mathrm{I}_n$, koji su parcijalno ispunjene funkcije na gomili) što npr. za crtanje funkcije \textbf{može zahtjevati veći broj dereferenciranja sa gomile}.
+Kod računalne primjene brzina izračuna ovisi u broju primjena dobivenog polinoma jer se unaprijed izračunata vandermondeova determinanta za sustav može primijeniti više puta dok je u slučaju lagrangeovih polinoma potrebno koristiti pokazivače na članove polinoma ($\mathrm{I}_n$, koji su parcijalno ispunjene funkcije na gomili) što npr. za crtanje funkcije \textbf{može zahtijevati veći broj dereferenciranja s gomile}.
 
-Taj problem je rješiv korištenjem biblioteka za simboličku matematiku, no to povečava veličinu distribuirane binarne datoteke, iako je taj kompromis generalno ok ako se bibliteka koristi za pojednostavljivanje više izraza u toku izvođenja programa.
+Taj problem je rješiv korištenjem biblioteka za simboličku matematiku, no to povećava veličinu distribuirane binarne datoteke, iako je taj kompromis generalno primjeren ako se biblioteka koristi za pojednostavljivanje više izraza tokom izvođenja programa ili se radi o jednonamjenskom programu.
 
 \subsubsection{Velika zavisnost o ulaznim podacima}
 
@@ -101,6 +101,6 @@ Kod računalne primjene, prethodno navedene parcijalno ispunjene funkcije (za $\
 
 \subsubsection{Slaba aproksimacija i oscilacije}
 
-Ako se odabere polinom preniskog supnja, on može \textbf{slabo aproksimirati originalnu funkciju}.
+Ako se odabere polinom preniskog stupnja, on može \textbf{slabo aproksimirati originalnu funkciju}.
 
-\textbf{Rungeov fenomen}: Ako se odabere polinom previsokog stupnja, na djelovima se mogu pojaviti \textbf{prevelike oscilacije}, tj. greške na rubovima intervala aproksimacije.
+\textbf{Rungeov fenomen}: Ako se odabere polinom previsokog stupnja, na dijelovima se mogu pojaviti \textbf{prevelike oscilacije}, tj. greške na rubovima intervala aproksimacije.

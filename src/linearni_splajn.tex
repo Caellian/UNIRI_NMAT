@@ -1,4 +1,4 @@
-\section{Linearni interpolacijski spline}
+\section{Linearni interpolacijski splajn}
 
 Prilikom pokušaja interpolacije velikog broja točaka pojavljuje se problem sa oscilacijama na rubovima interpoliranih točaka gdje vrijedi:
 
@@ -43,9 +43,9 @@ Neka su zadani čvorovi interpolacije i \textbf{interpolicijski polinom dogovore
 
 Uvijeti \ref{ls_continuation}, \ref{ls_match_first}, \ref{ls_match_transition} i \ref{ls_match_last} opisuju neprekidnost polinoma među interpoliranim podsegmentima.
 
-Ako odaberemo da su polinomi $p_i(x)\in\mathcal{P}_1$ (polinomi prvog stupnja), tada imamo dovoljno uvjeta iz kojih možemo jedinstveno odrediti sve koeficijente linearnog interpolacijskog splinea.
+Ako odaberemo da su polinomi $p_i(x)\in\mathcal{P}_1$ (polinomi prvog stupnja), tada imamo dovoljno uvjeta iz kojih možemo jedinstveno odrediti sve koeficijente linearnog interpolacijskog splajna.
 
-\subsection{Linearni spline}
+\subsection{Linearni splajn}
 
 Svakom podsegmentu $[x_i,x_{i+1}]$ pridužimo jedinstveni polinom $p_i(x)$ kojeg jednostavno zapisujemo u obliku lagrangeovog ili newtonovog interpolacijskog polinoma:
 
@@ -54,7 +54,7 @@ Svakom podsegmentu $[x_i,x_{i+1}]$ pridužimo jedinstveni polinom $p_i(x)$ kojeg
 \text{Newtonov polinom:}\qquad p_i(x) =& y_i + \frac{y_{i+1}-y_i}{x_{i+1}-x_i}(x-x_i)
 \end{align*}
 
-Linerani spline se na kraju definira kao funkcija po dijelovima gdje je svaki dio definiran za pojedini segment kao pripadni polinom:
+Linerani splajn se na kraju definira kao funkcija po dijelovima gdje je svaki dio definiran za pojedini segment kao pripadni polinom:
 
 \begin{equation}
     \Phi(x)=\begin{cases}
@@ -67,8 +67,8 @@ Linerani spline se na kraju definira kao funkcija po dijelovima gdje je svaki di
 
 \newpage
 
-\begin{examplebox}[određivanje linearnog splinea]
-    Odredi linearni spline ako su zadane sljedeće točke:
+\begin{examplebox}[određivanje linearnog splajna]
+    Odredi linearni splajn ako su zadane sljedeće točke:
 
     \center
     \begin{tabular}{r|c|c|c|c|c}
@@ -89,7 +89,7 @@ Određujemo Newtonove interpolacijske polinome za sve tražene podsegmente:
     p_3(x)=y_3+\frac{y_4-y_3}{x_4-x_3}(x-x_3)&=1+\frac{0-1}{4-3}(x-3)=4-x\\
 \end{align*}
 
-Te iz toga dobivamo formulu za linearni interpolacijski spline:
+Te iz toga dobivamo formulu za linearni interpolacijski splajn:
 
 $$
 \Phi(x)=\begin{cases}
@@ -123,15 +123,15 @@ $$
 
 \subsection{Ocjena greške}
 
-Ocjena greške linearnog splinea slijedi iz ovjene greške interpolacijskog polinoma.
+Ocjena greške linearnog splajna slijedi iz ovjene greške interpolacijskog polinoma.
 
-Neka je $f(x)\in\mathcal{C}^2[a,b]$. Tada je ocjena greške interpolacije funkcije $f$ linearnim splineom:
+Neka je $f(x)\in\mathcal{C}^2[a,b]$. Tada je ocjena greške interpolacije funkcije $f$ linearnim splajnom:
 
 $$
 |f(x)-\phi(x)| \leq \frac{\omega(x)\max_{x\in[x_i,x_{i+1}]}|f''(x)|}{2!}
 $$
 
-Uvođenjem oznaka $h=\max_{i\in[1,n]}|x_i-x_{i-1}|$ i $M=\max_{x\in[a,b]}|f''(x)|$ tada je $\omega(x)\leq{h^2\over4}$ pa za ocjenu greške linearnim splineom vrijedi:
+Uvođenjem oznaka $h=\max_{i\in[1,n]}|x_i-x_{i-1}|$ i $M=\max_{x\in[a,b]}|f''(x)|$ tada je $\omega(x)\leq{h^2\over4}$ pa za ocjenu greške linearnim splajnom vrijedi:
 
 $$
 |f(x) - \phi(x)|\leq \frac{\text{M}h^2}{8}
@@ -154,11 +154,11 @@ $$
 \newpage
 
 \begin{examplebox}[aproksimacija s točnošću]
-    Aproksimirati funkciju $f(x) = \ln(x)$ na segmentu $[1,100]$ po dijelovima linearnom interpolacijom. Fiksirajmo traženu točnost $\varepsilon = 10^{-4}$ koju zahtijevamo na cijelom segmentu. Nači broj čvorova kako bi se postigla zadana točnost na:
+    Aproksimirati funkciju $f(x) = \ln(x)$ na segmentu $[1,100]$ po dijelovima linearnom interpolacijom. Fiksirajmo traženu točnost $\varepsilon = 10^{-4}$ koju zahtijevamo na cijelom segmentu. Pronaći broj čvorova kako bi se postigla zadana točnost na:
 
     \begin{enumerate}
         \item ekvidistantnoj mreži s korakom $h$ na cijelom segmentu $[1,100]$
-        \item podijeljenim podsegmentima $[1,2]$, $[2,7]$, $[7,100]$ gdje svaki od navedenih podsegmenata dijelimop ekvidistantnom mrežom čvorova s koracima $h_1$, $h_2$, $h_3$, respektivno.
+        \item podijeljenim podsegmentima $[1,2]$, $[2,7]$, $[7,100]$ gdje svaki od navedenih podsegmenata dijelimo ekvidistantnom mrežom čvorova s koracima $h_1$, $h_2$, $h_3$, respektivno.
     \end{enumerate}
 \end{examplebox}
 
@@ -168,15 +168,15 @@ $$
     $$
     Promatrana funkcija uvijek postiže svoj maksimum u lijevom kraju segmenta $[1,100]$.
 
-Koristeći ocjenu greške za linearni spline, dobivamo da je na segmentu $[1, 100]$ uz ekvidistantnu mrežu s
-korakom $h$ greška interpolacije
+Koristeći ocjenu greške za linearni splajn, dobivamo da je na segmentu $[1, 100]$
+uz ekvidistantnu mrežu s korakom $h$ greška interpolacije
 
 $$
 |\Phi(x)-f(x)|\leq\frac{1\cdot h^2}{8}.
 $$
 
 U našem slučaju mora vrijediti $\displaystyle\frac{h^2}{8}\leq 10^{-4}$ što povlači $h\leq0.02828$.
-S obzirom da je
+S obzirom na to da je
 
 $$
 h=\frac{b-a}{n}=\frac{100-1}{n}=\frac{99}{n},
@@ -196,7 +196,7 @@ dobivamo da je $n=3500.17$, a budući da je $n\in\mathbb{N}$, tada u formulu nij
 
 \subsection{Nedostaci}
 
-Dok je aproksimacija danih podataka linearnim splineom može biti dovoljna u nekim slučajevima, prijelazi između segmenata mogu biti pre nagli i primjetni za druge primjene. Na primjer:
+Dok je aproksimacija danih podataka linearnim splajnom može biti dovoljna u nekim slučajevima, prijelazi između segmenata mogu biti pre nagli i primjetni za druge primjene. Na primjer:
 
 \begin{itemize}
     \item brzina kretanja tijela u prostoru se može doimati \textit{neprirodnom},
