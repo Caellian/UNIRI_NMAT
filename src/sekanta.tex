@@ -1,0 +1,51 @@
+\subsection{Metoda sekante}
+
+Metoda sekante premošćuje prethodno navedene probleme metode tangente.
+
+Aproksimiramo li derivaciju $f'(x_n)$ izrazom
+$$
+\dfrac{f(x_n)-f(x_{n-1})}{x_n - x_{n-1}},
+$$
+iz \fancyeq[izraza]{eq:metoda_tangente}, dobivamo
+$$
+x_{n+1} = x_n - f(x_n)\dfrac{x_n-x_{n-1}}{f(x_n)-f(x_{n-1})}.
+$$
+
+Kako je vrijednost $f(x_{n-1})$ poznata iz prethodne iteracije, metoda sekante u
+svakom koraku treba samo jedno računanje funkcije $f$. Zbog toga je metoda
+sekante duplo \textit{jeftinija} od Newtonove metode koja u svakom koraku
+zahtijeva računanje vrijednosti $f$ i $f'$.
+
+Uz zadanu točnost $\varepsilon$ kriterij zaustavljanja je:
+
+$$
+|x_{n+1}-x_n| = |f(x_n)|\cdot\left|\frac{x_n-x_{n-1}}{f(x_n)-f(x_{n-1})}\right|
+$$
+
+\subsubsection{Brzina konvergencije}
+
+Ako su početne aproksimacije $x_0$ i $x_1$ birane dovoljno blizu rješenja, tada
+uz uvjete $f'(x)\neq 0$ i $f''(x)\neq 0$, metoda sekante konvergira brzinom
+$\frac{1+\sqrt{5}}{2}\approx 1.618$.
+
+\subsubsection{Algoritam}
+
+\begin{algorithmic}
+\Function{Sekanta}{$a,\;b,\;\varepsilon,\;f,\;n$}
+    \State $i \gets 1$
+    \While{$\lvert b - a \rvert > \varepsilon$}
+        \State $i \gets i + 1$
+        \State $x_i \gets b - \dfrac{f(b) \cdot (b - a)}{f(b) - f(a)}$
+        \If{$f(x_i) = 0$}
+            \State \Return $x_i,\;i$ \Comment{Pronađeno je egzaktno rješenje.}
+        \Else
+            \State $a \gets b$
+            \State $b \gets x_i$
+        \EndIf
+        \If{$i \geq n$}
+            \State \textit{\textbf{pogreška:}} \textit{Rješenje na zadanu točnost nije nađeno u zadanom broju iteracija.}
+        \EndIf
+    \EndWhile
+    \State \Return $x_i,\;i$
+\EndFunction
+\end{algorithmic}

@@ -10,7 +10,7 @@ Formula za Lagrangeov interpolacijski polinom (${\mathbf L}_n$) je:
 Lagrangeov interpolacijski polinom je bolji od korištenja vandermondeove determinante jer su sustavi dobiveni vandermondeovom determinantom nestabilni.
 Također je i postupak brži jer ne zahtijeva računanje inverzne matrice koja u računalnoj primjeni zahtijeva mnogo međukoraka i instrukcija.
 
-\begin{examplebox}[uporaba lagrangeovog polinoma]
+\begin{example}[uporaba lagrangeovog polinoma]
     Odredi interpolacijski polinom koristeći lagrangeove polinome ako su zadane sljedeće točke:
 
     \center
@@ -19,7 +19,7 @@ Također je i postupak brži jer ne zahtijeva računanje inverzne matrice koja u
         \hline
         $y$&-4&2&0\\
     \end{tabular}
-\end{examplebox}
+\end{example}
 
 Računamo $\mathrm{I}_0(x), \mathrm{I}_1(x),$ i $\mathrm{I}_2(x)$ za točke:
 
@@ -62,8 +62,8 @@ Nakon uvrštavanja dobivamo polinom:
         xmin=-4,xmax=4.5,
         ymin=-5,ymax=3,
         ]
-        \addplot[plotlinefound] expression[samples=100]{4/21*\x^2 + 2/3*\x - 26/7} 
-                    node[pos=0.5,anchor=north west]{$y=\sin(2x)+\frac{1}{2}$};
+        \addplot[plotlinefound] expression[samples=100]{4/21*x^2 + 2/3*x - 26/7}
+          node[pos=0.5, anchor=north west] {$y=\sin(2x) + \frac{1}{2}$};
         \addplot[plotinterpolated] coordinates {(-3,-4)};
         \addplot[plotinterpolated] coordinates {(4,2)};
         \addplot[plotinterpolated] coordinates {(3,0)};
@@ -74,7 +74,7 @@ Nakon uvrštavanja dobivamo polinom:
 
 \subsection{Nedostaci}
 
-\begin{definitionbox}
+\begin{definition}
     Funkcija $g(x)$ je reda $\mathcal{O}(h(x))$ za $x \to x_0$, odnosno
     $$
     g(x) = \mathcal{O}(h(x)), x\to x_0
@@ -83,7 +83,7 @@ Nakon uvrštavanja dobivamo polinom:
     $$
     |x-x_0| \leq \sigma \Rightarrow |g(x)| \leq C|h(x)|
     $$
-\end{definitionbox}
+\end{definition}
 
 \subsubsection{Veliki broj aritmetičkih operacija}
 

@@ -1,0 +1,102 @@
+\subsection{Newtonova metoda (metoda tangente)}
+
+Newtonova metoda se smatra standardnom metodom rješavanja nelinearnih jednadžbi
+oblika $f(x)=0$, uz pretpostavku da je $f$ diferencijabilna te da je $f'(x) \neq
+0$ u nekoj okolini nultočke $\xi$.
+
+Neka je $x_0$ zadana početna aproksimacija tražene nultočke $\xi$. Prema
+Taylorovom teoremu funkcija $f$ se može aproksimirati Taylorovim polinomom:
+$$
+f(x_1) = f(x_0) + f'(x_0)(x_1-x_0)+\dfrac{f''(\xi)}{2}(x_1-x_0)^2,
+$$
+pri čemu se $\xi$ nalazi između $x_0$ i $x_1$. Zanemarimo li kvadratni član,
+dobivamo:
+$$
+f(x_1) \approx f(x_0) + f'(x_0)(x_1-x_0).
+$$
+
+Ako je $x_1$ dovoljno blizu nultočke $\xi$, onda je $f(x_1)\approx 0$ pa je
+$$
+0 \approx f(x_0) + f'(x_0)(x_1-x_0).
+$$
+
+Dakle, sljedeću aproksimaciju biramo tako da vrijedi:
+$$
+x_1 = x_0 - \dfrac{f(x_0)}{f'(x_0)}.
+$$
+
+
+Generalizacijm dolazimo do sljedeće sheme:
+\begin{equation}
+    \label{eq:metoda_tangente}
+    x_{n+1} = x_n - \dfrac{f(x_n)}{f'(x_n)},\quad n \in \mathbb{N}_0.
+\end{equation}
+
+\fancyeq[Relacijom]{eq:metoda_tangente} definirana je metoda tangente (Newtonova
+metoda) za traženje nultočaka funkcije $f$. Kao i kod svake druge iterativne
+metode, potrebno je zadati početnu aproksimaciju $x_0$. Svaka sljedeća iteracija
+računa se prema prethodnoj iteraciji dobivenoj prema
+\fancyeq[formuli]{eq:metoda_tangente}.
+
+Nedostaci metode tangente su to što:
+\begin{itemize}
+    \item nije moguče garantirati konvergenciju,
+    \item derivacija $f'(x)$ se treba eksplicitno izračunati u svakoj točki
+    aproksimacije,
+    \item početni korak mora biti dovoljno blizu rješenja.
+\end{itemize}
+
+% TODO: Slika newtonove metode
+
+\subsubsection{Konvergencija}
+
+Neka funkcija $f: [a,b] \to \mathbb{R}$ ima neprekidnu drugu derivaciju na
+segmentu $[a,b]$. Neka je $f(a)f(b) < 0$, odnosno neka funkcija $f$ mijenja
+predznak na tom segmentu.
+Neka prva i druga derivacije funkcije $f$ imaju stalan predznak na promatranom
+segmentu.
+
+Ako je početna aproksimacija odabrana tako da vrijedi
+$$
+    f(x_0)f''(x_0) > 0
+$$
+tada niz aproksimacija dobiven metodom tangente konvergira prema jedinstvenom
+rješenju jednadžbe $f(x) = 0$.
+
+\subsubsection{Ocjena greške}
+
+Za aproksimaciju metodom tangente vrijedi ocjena greške
+$$
+|\xi - x_i| \leq \dfrac{M_2}{2m_1}(x-x_{i-1})^2,
+$$
+gdje je $M_2 = \max_{x\in [a,b]}|f''(x)|$ i $m_1 = \min_{x\in [a,b]}|f'(x)|$.
+
+Metoda ima kvadratnu brzinu konvergencije:
+$$
+|\xi - x_{x+1}| \leq \dfrac{M_2}{2m_1}(x-x_i)^2.
+$$
+
+\subsubsection{Algoritam}
+
+\begin{algorithmic}
+\Function{Newton}{$x,\;\varepsilon,\;f,\;f',\;f'',\;n$}
+    \If{$f(x) \cdot f''(x) < 0$}
+        \State \textit{\textbf{pogreška:}} \textit{Newtonova metoda ne konvergira. Treba izabrati drugu početnu aproksimaciju.}
+    \Else
+        \State $i \gets 1$
+        \While{$i \leq n$}
+            \If{$\lvert f'(x) \rvert < \varepsilon$}
+                \State \textbf{break} \Comment{Horizontalna tangenta}
+            \EndIf
+            \State $dx \gets \dfrac{f(x)}{f'(x)}$
+            \State $x \gets x - dx$
+            \If{$\lvert dx \rvert < \varepsilon$}
+                \State \Return $x,\;i$
+            \Else
+                \State $i \gets i + 1$
+            \EndIf
+        \EndWhile
+        \State \textit{\textbf{pogreška:}} \textit{Rješenje na zadanu točnost nije nađeno u zadanom broju iteracija.}
+    \EndIf
+\EndFunction
+\end{algorithmic}

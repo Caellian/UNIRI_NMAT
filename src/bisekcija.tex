@@ -1,0 +1,127 @@
+\section{Određivanje nultočka}
+
+Cilj numeričkih metoda za rješavanje nelinearnih jednadžbi je odrediti
+\textbf{nultočku (korijen, rješenje)} neprekidne ralne funkcije $f$ na segmentu
+$[a,b]$, odnosno rješiti
+$$
+    f(x) = 0\,.
+$$
+
+Moguće je da
+\begin{itemize}
+    \item funkcija $f$ ima više realnih nultočaka i da su neke višestruke, kao i
+    da
+    \item funkcija $f$ ima kompleksne nultočke (tj. nema realne nultočke),
+\end{itemize}
+
+Ako za funkciju $f$ vrijedi $f(a)f(b) \leq 0$, onda ona na segmentu $[a,b]$
+mijenja predznak te postoji \textit{barem jedna} nultočka. Ako dodatno znamo da
+je funkcija $f$ monotona na tom segmentu, onda znamo i da je nultočka
+jedinstvena.
+
+Traženje nultočki do na zadanu točnost sastoji se od dvije faze:
+\begin{enumerate}
+    \item Određivanje što manjeg segmenta u kojem se nalazi nultočka funkcije
+    \item Nalaženje nultočke iterativnom metodom do na traženu točnost
+\end{enumerate}
+
+Osnovni korak numeričkih metoda je izolirati jedan korijen (nultočku, rješenje)
+$\xi$ jednadžbe $f(x) = 0$. Nakon što se izolira jedan korijen jednadžbe nekom
+odabranom numeričkom metodom formiramo niz aproksimacija $x_i \to \xi$.
+Numeričku metodu zaustavljamo kad se zadovolji zadani kriterij točnosti
+$$
+    |\xi - x_i | < \varepsilon\,.
+$$
+
+Vrlo često nije jednostavno prepoznati kad smo dovoljno blizu korijena, ali iz
+Teorema o srednjoj vrijednosti slijedi
+$$
+    |\xi - x_i| = \left| \frac{f(x_i)}{f'(c)} \right|, c \in [\xi, x_i]\,.
+$$
+
+\begin{definition}[red konvergencije]
+    Neka niz $(x_i)_{i\in\mathbb{N}}$ dobiven nekom iterativnom metodom
+    konvergira prema $\xi$. Ako postoje dvije pozitivne konstante $C$, $r$,
+    takve da vrijedi
+    $$
+        \lim_{i\to\infty} \left|\xi-x_{i+1}\right| \leq C|\xi-x_i|^r\,,
+    $$
+    tada kažemo da \textbf{metoda ima red konvergencije} $r$. 
+\end{definition}
+
+\subsection{Metoda bisekcije (polovljenja)}
+
+Metoda bisekcije ili polovljenja ima zanimljivu primjenu za traženje korijena
+nelinearnih jednadžbi iako se vrlo često koristi kod pretraživanja monotonih
+nizova.
+
+Metoda se oslanja na ideju sukcesivnog ograđivanja rješenja. Segment $[a, b]$ za
+koji vrijedi nejednakost $f(a)f(b) \leq 0$ prepolovimo i provjerimo u kojem od
+dva novonastala segmenta funkcija $f$ mijenja predznak. Polovljenje segmenta
+nastavljamo dok duljina segmenta ne postane dovoljno mala da se zadovolji uvjet
+konvergencije.
+
+Metoda bisekcije \textbf{ne može odrediti višestruke nultočke parnog reda} jer u
+tim slučajevima funkcija ne mijenja predznak u okolini nultočke.
+
+Metoda bisekcije \textbf{ima najlošiju ocjenu greške} (\textbf{najsporija}
+metoda), ali je i metoda koja \textbf{ima sigurnu konvergenciju}.
+
+% TODO: Dodati ilustraciju primjene
+
+\subsubsection{Ocjena greške}
+
+Greška metode se može procjeniti a priori.
+
+$$
+    |\xi - x_i| \leq \frac{b_i-a_i}{2} = \dots = \frac{b_0 - a_0}{2^{i+1}}\,.
+$$
+
+Ako je željena točnost $\varepsilon$, tada se unaprijed može izračunati potreban
+broj iteracija iz nejednadžbe
+$$
+    \frac{b_0 - a_0}{2^{i+1}} \leq \varepsilon\,.
+$$
+
+\begin{example}
+    Odredi potreban broj iteracija metode bisekcije kako bi odredila nultočka za
+    funkciju $f(x) = x^3 - 2x - 5$ na segmentu $[1,3]$ sa točnošću $\varepsilon
+    = 10^{-3}$ .
+\end{example}
+
+Određujemo broj iteracija iz nejednadžbe
+$$
+    \frac{b_0 - a_0}{2^{i+1}} \leq \varepsilon\,.
+$$
+U ovom slučaju $a_0 = 1$, $b_0 = 3$ pa je
+$$
+    \frac{3 - 1}{2^{i+1}} \leq 10^{-3} \implies 2^{i+1} \geq 2 \cdot 10^3 \implies
+    (i + 1) \log 2 \geq \log (2 \cdot 10^3) \implies i \geq \frac{\log (2 \cdot 10^3)}{\log 2} - 1 \implies i \geq 10\,.
+$$
+Dakle, potrebno je napraviti najmanje 11 iteracija.
+
+\subsubsection{Brzina konvergencije}
+
+\begin{gather*}
+    \xi - x_i \leq \frac{b_i-a_i}{2} = \varepsilon_i\,,\\
+    \varepsilon_i={1\over 2} \varepsilon_{i-1}\,.
+\end{gather*}
+
+Dakle, budući da je $C={1\over 2}$, $r=1$ bisekcija ima red konvergencije 1,
+odnosno metoda bisekcije \textbf{konvergira linearno}.
+
+\subsubsection{Algoritam}
+
+\begin{algorithmic}
+\Function{Bisekcija}{$f,\;a,\;b,\;\varepsilon$}
+    \State $c \gets (a + b) / 2$
+    \If{$|b - a| < \varepsilon$}
+        \State \Return $c$
+    \EndIf
+    \If{$f(a)f(c) leq 0$}
+        \State \Return \Call{Bisekcija}{$f, a, c, \varepsilon$}
+    \Else
+        \State \Return \Call{Bisekcija}{$f, c, b, \varepsilon$}
+    \EndIf
+\EndFunction
+\end{algorithmic}

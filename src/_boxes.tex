@@ -17,7 +17,7 @@
 \definecolor{colorexamplefg}{HTML}{27B29F}
 
 \newcounter{examplecounter}[section]
-\NewDocumentEnvironment{examplebox}{ o +b }{
+\NewDocumentEnvironment{example}{ o +b }{
     \refstepcounter{examplecounter} 
     \IfValueTF{#1}
         {\begin{borderbox}{\faPencil}{Primjer \theexamplecounter: #1}{colorexamplefg}{colorexamplebg}}
@@ -31,7 +31,7 @@
 \definecolor{colordefinitionfg}{HTML}{0E7EF1}
 
 \newcounter{definitioncounter}[section]
-\NewDocumentEnvironment{definitionbox}{ o +b }{
+\NewDocumentEnvironment{definition}{ o +b }{
     \refstepcounter{definitioncounter} 
     \IfValueTF{#1}
         {\begin{borderbox}{\faInfoCircle}{Definicija \thedefinitioncounter: #1}{colordefinitionfg}{colordefinitionbg}}
@@ -42,7 +42,7 @@
 }
 
 \newcounter{theoremcounter}[section]
-\NewDocumentEnvironment{theorembox}{ o +b }{
+\NewDocumentEnvironment{theorem}{ o +b }{
     \refstepcounter{theoremcounter} 
     \IfValueTF{#1}
         {\begin{borderbox}{\faInfoCircle}{Teorem \thetheoremcounter: #1}{colordefinitionfg}{colordefinitionbg}}

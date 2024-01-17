@@ -152,7 +152,7 @@ p_n(x) =& \sum_{i=1}^{n}\left(\frac{\Delta^if(x_0)}{i!h^i}\prod_{j=0}^{i-1}x-x_j
 
 \newpage
 
-\begin{examplebox}
+\begin{example}
     Funkciju $f(x)=sin(\pi x)$ na segmentu [0, 1] aproksimirati interpolacijskim polinomom koji prolazi sljedećim točkama:
 
     \center
@@ -161,7 +161,7 @@ p_n(x) =& \sum_{i=1}^{n}\left(\frac{\Delta^if(x_0)}{i!h^i}\prod_{j=0}^{i-1}x-x_j
         \hline
         $f(x)$ & 0 & 0.7071 & 1 & 0.7071 & 0
     \end{tabular}
-\end{examplebox}
+\end{example}
 
 S obzirom na to da su zadane točke sve podjednako udaljene ($h=0.25$), možemo koristiti newtonovu interpolaciju za ekvidistantne točke:
 
@@ -229,9 +229,9 @@ $$
 |e(x)| = |f(x) - p_n(x)| \leq \frac{|\omega(x)|}{(n+1)!}\mathrm{M}_{n+1}
 $$
 
-\begin{examplebox}
+\begin{example}
     Odrediti grešku newtonovog interpolacijskog polinoma iz prethodnog zadatka u točki $x=0.6$ te odrediti globalnu ocjenu greške funkcije na zadanom segmentu.
-\end{examplebox}
+\end{example}
 
 Koristeći interpolacijski polinom iz prethodnog zadatka dobivamo $p_4(0.6) = 0.95121$ dok je $f(0.6) = 0.95105$. Uvrštavanjem u formulu za apsolutnu pogrešku dobivamo:
 

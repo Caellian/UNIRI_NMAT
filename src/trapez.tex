@@ -1,0 +1,78 @@
+\section{Numeričko integriranje}
+
+Postoji veliki broj funkcija kod kojih nije moguće ili je izrazito teško
+analitički odrediti vrijednost integrala. U tim slučajevima se mogu koristiti
+numeričke metode za \textbf{približno} rješavanje.
+
+Aproksimacija integrala numeričkim metodama integracije se provodi određivanjem
+interpolacijskog polinoma $n$-tog stupnja:
+$$
+P_n(x) \approx f(x).
+$$
+
+Ako je polinom $P_n(x)$ dobra aproksimacija podintegralne funkcije, tada vrijedi
+$$
+I = \int_a^b f(x) dx \approx I^* = \int_a^b P_n(x) dx.
+$$
+
+Interpolaciju funkcije $f$ je moguće odrediti na više načina, ali konačne
+integracijske formule imaju oblik
+$$
+I^* = \sum_{i=0}^n w_i f(x_i),
+$$
+gdje je $n$ unaprijed zadan, $x_i$ su čvorovi integracije (interpolacije), a
+$w_i$ su težine.
+
+Ako su čvorovi integracijskih formula fiksni, onda takve formule nazivamo
+\textbf{Newton-Cotesove formule}. Ako se čvorovi bitaju tako da se dobije veća
+točnost formule, tada takve formule zovemo \textbf{Gaussove formule}.
+
+U praksi se koriste dva tipa Newton-Cotesovih formula:
+\begin{itemize}
+    \item zatvorene formule - rubovi segmenata $a$ i $b$ su ujedno i čvorovi,
+    \item otvorene formule - rubovi segmenata $a$ i $b$ nisu čvorovi.
+\end{itemize}
+
+\subsection{Trapezna formula}
+
+Najjednostavniji primjer zatborenih Newton-Cotesovih formula dobijemo kad
+podintegralnu funkciju $f$ interpoliramo linearnom funkcijom u čvorovima
+interpolacije.
+
+Geometrijska interpretacija trapezne formule je aproksimacija površine ispod
+krivulje površinom trapeza.
+
+Trapezna formula ima oblik: $\displaystyle
+I^* = \int_a^b P_1(x)dx = (b-a)\dfrac{f(a)+f(b)}{2}
+$
+
+\subsubsection{Ocjena greške}
+
+Neka je $f\in C^2[a,b]$. Tada postoji $\xi \in [a,b]$ takav da vrijedi
+$$
+I - I^* = \int_a^b f(x) dx - (b-a)\dfrac{f(a)+f(b)}{2} = -(b-a)^3\dfrac{f''(\xi)}{12}.
+$$
+
+Ako označimo $\displaystyle M_2 = \max_{x\in[a,b]}|f''(x)|$ onda je apsolutna
+greška $\displaystyle \Delta I^* = |I - I^*| \leq \dfrac{(b-a)^3}{12}M_2.$
+
+\subsubsection{Algoritam}
+
+Pythonov \verb|scipy.integrate| modul sadrži \verb|trapz| funkciju koja kao
+argumente uzima numpy polja rezultata i ulaznih vrijednosti te integrira
+koristeći trapeznu formulu.
+
+Funkcija za integraciju na intervalu $[a, b]$ uz $n$ trapeza je:
+\begin{algorithmic}
+\Function{Trapez}{$a,\;b,\;h,\;f,\;n$}
+    \State $h \gets \dfrac{b - a}{n}$
+    \State $r \gets \frac{f(a) + f(b)}{2}$
+    
+    \For{$i \in [1, n-1]$}
+      \State $x \gets a + i \cdot h$
+      \State $r \gets r + f(x)$
+    \EndFor
+    
+    \State \Return $r \cdot h$
+\EndFunction
+\end{algorithmic}
