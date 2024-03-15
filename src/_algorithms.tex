@@ -1,0 +1,32 @@
+\renewcommand{\algorithmicrequire}{\textbf{Require:}}
+\renewcommand{\algorithmicensure}{\textbf{Ensure:}}
+\renewcommand{\algorithmicfunction}{\textbf{funkcija}}
+\renewcommand{\algorithmicend}{\textbf{kraj}}
+\renewcommand{\algorithmicif}{\textbf{ako}}
+\renewcommand{\algorithmicthen}{\textbf{onda}}
+\renewcommand{\algorithmicelse}{\textbf{inače}}
+\renewcommand{\algorithmicfor}{\textbf{za}}
+\renewcommand{\algorithmicforall}{\textbf{za sve}}
+\renewcommand{\algorithmicdo}{\textbf{provedi}}
+\renewcommand{\algorithmicwhile}{\textbf{dok}}
+\renewcommand{\algorithmicloop}{\textbf{petlja}}
+\renewcommand{\algorithmicrepeat}{\textbf{ponovi}}
+\renewcommand{\algorithmicuntil}{\textbf{do}}
+\newcommand{\algorithmicprint}{\textbf{ispis}}
+\renewcommand{\algorithmicreturn}{\textbf{vrati}}
+
+\newcommand{\algorithmictrue}{$\mathbf{\top}$}
+\newcommand{\algorithmicfalse}{$\mathbf{\bot}$}
+
+\algrenewtext{ElseIf}{\textbf{ili}\ \algorithmicif}
+\algrenewtext{EndFunction}{\textbf{kraj funkcije}}
+\algrenewtext{EndIf}{\textbf{kraj uvjeta}}
+\algrenewtext{EndFor}{\textbf{kraj petlje}}
+\algrenewtext{EndWhile}{\textbf{kraj petlje}}
+\algrenewtext{EndLoop}{\textbf{kraj petlje}}
+\algrenewtext{Break}{\textbf{prekid petlje}}
+
+\algrenewcommand{\algorithmiccomment}[1]{\hskip3em\textcolor{darkgray}{// #1}}
+
+\algnewcommand{\algorithmicerror}{\textbf{\textit{pogreška:}}}
+\algnewcommand{\Error}[1]{\State \algorithmicerror{} \begin{minipage}{\linewidth} \raggedright \textit{#1} \end{minipage}}

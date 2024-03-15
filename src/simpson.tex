@@ -1,6 +1,6 @@
 \subsection{Simpsonova formula}
 
- je nešto složeniji primjer zatvorenih Newton-Cotesovih
+\textbf{Simpsonova formula} je nešto složeniji primjer zatvorenih Newton-Cotesovih
 formula koji dobijemo kad podintegralnu funkciju $f$ interpoliramo kvadratnom
 funkcijom u čvorovima interpolacije:
 \begin{gather*}
@@ -48,3 +48,40 @@ koristeći simpsonovu formulu.
     \State \Return $(r + f(b)) \cdot \frac{h}{3}$
 \EndFunction
 \end{algorithmic}
+
+\subsubsection{Produljena Simpsonova formula}
+
+U cilju postizanja bolje aproksimacije $I^*$ integrala $I$, segment $[a,b]$
+možemo podijeliti na paran broj $(n=2m)$ podsegmenata uniformne duljine
+$$
+h=\frac{b-a}{n}\,,
+$$
+u čvorovima $x_i=a+ih, i \in [0,n]$.
+
+Uz oznaku $y_i=f(x_i), i \in [0,n]$ redom, na po dva podsegmenata primjenjujemo
+Simpsonovu formulu te tako dobivamo produljenu Simpsonovu formulu.
+
+Vrijedi:
+
+\begin{gather*}
+    I = I^* + E_n\,,\\
+    I^* = \frac{h}{3}(y_0+y_{2m}+4(y_1+\dots+y_{2m-1})+2(y_2+\dots+y_{2m-2}))\,,\\
+    E_n = -\frac{b-a}{180}h^4f^{(4)}(c),\, c\in\langle a, b \rangle \,.
+\end{gather*}
+
+\bigskip
+\noindent
+\textbf{Ocjena greške}
+
+Ukupna greška produljene Simpsonove formule je
+
+$$
+I - I^* = -h^5\sum_{i=0}^{\frac{n}{2}-1}\frac{f^{(4)}(\xi)}{90} = \frac{(b-a)h^4}{180}f^{(4)}(\xi)\,.
+$$
+
+Iz ocjene greške moguće je kontrolirati grešku aproksimacije. Za zadanu točnost
+aproksimacije $\varepsilon$ možemo unaprijed odrediti potrebam broj podsegmenata
+
+$$
+n\geq \sqrt[4]{\frac{(b-a)^5M_4}{180\cdot \varepsilon}}\,,\quad M_4 = \max_{x\in[a,b]}|f^{(4)}(x)|.
+$$

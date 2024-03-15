@@ -1,15 +1,17 @@
-\pgfplotsset{compat=1.18, width=0.95\columnwidth, height=8cm}
-
-% axis style
-\pgfplotsset{every axis/.append style={%
-                    grid=major,
-                    grid style={dashed},
-                    axis x line=middle,
-                    axis y line=middle,
-                    axis line style={->},
-                    xlabel={$x$},
-                    ylabel={$y$},
-                    }}
+\pgfplotsset{
+    compat=1.18,
+    width=0.95\columnwidth,
+    height=8cm,
+    every axis/.append style={%
+        grid=major,
+        grid style={dashed},
+        axis x line=middle,
+        axis y line=middle,
+        axis line style={->},
+        xlabel={$x$},
+        ylabel={$y$},
+    }
+}
 
 
 \definecolor{cRed}{HTML}{ef1210}
@@ -21,7 +23,7 @@
 \pgfplotsset{plotlinefound/.style={
     color=cBlue,
     no marks,
-    line width={1pt},
+    line width={1pt}
     }}
 % target line style
 \pgfplotsset{plotlinetarget/.style={

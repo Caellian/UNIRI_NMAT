@@ -1,14 +1,21 @@
-\pagenumbering{roman}
+\pagenumbering{gobble}
 \maketitle
 \newpage
+\pagenumbering{roman}
+\setcounter{page}{1}
+
+\clearpage
 
 \cleardoublepage
 \phantomsection
+
+\subpdfbookmark{Sadržaj}{name}
 \tableofcontents
 
 \clearpage
 \pagenumbering{arabic}
-\setcounter{page}{1}
+
+\chapter{Kolegij}
 
 \include{greske}
 \include{aps_i_rel_greska}
@@ -22,7 +29,13 @@
 \include{bisekcija}
 \include{newtonova_metoda}
 \include{sekanta}
+\include{newton_cotes}
 \include{trapez}
 \include{simpson}
-\include{newton_cotes}
 \include{odj}
+
+\clearpage
+\pagenumbering{Alph}
+
+\chapter{Primjeri primjena}
+\include{bezier}

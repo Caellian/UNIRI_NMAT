@@ -43,7 +43,7 @@ $\frac{1+\sqrt{5}}{2}\approx 1.618$.
             \State $b \gets x_i$
         \EndIf
         \If{$i \geq n$}
-            \State \textit{\textbf{pogreška:}} \textit{Rješenje na zadanu točnost nije nađeno u zadanom broju iteracija.}
+            \Error{Rješenje na zadanu točnost nije nađeno u zadanom broju iteracija.}
         \EndIf
     \EndWhile
     \State \Return $x_i,\;i$

@@ -81,7 +81,7 @@ $$
 \begin{algorithmic}
 \Function{Newton}{$x,\;\varepsilon,\;f,\;f',\;f'',\;n$}
     \If{$f(x) \cdot f''(x) < 0$}
-        \State \textit{\textbf{pogreška:}} \textit{Newtonova metoda ne konvergira. Treba izabrati drugu početnu aproksimaciju.}
+        \Error{Newtonova metoda ne konvergira.\linebreak Treba izabrati drugu početnu aproksimaciju.}
     \Else
         \State $i \gets 1$
         \While{$i \leq n$}
@@ -96,7 +96,7 @@ $$
                 \State $i \gets i + 1$
             \EndIf
         \EndWhile
-        \State \textit{\textbf{pogreška:}} \textit{Rješenje na zadanu točnost nije nađeno u zadanom broju iteracija.}
+        \Error{Rješenje na zadanu točnost nije nađeno u zadanom broju iteracija.}
     \EndIf
 \EndFunction
 \end{algorithmic}

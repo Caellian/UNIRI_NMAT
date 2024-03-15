@@ -114,11 +114,11 @@ odnosno metoda bisekcije \textbf{konvergira linearno}.
 
 \begin{algorithmic}
 \Function{Bisekcija}{$f,\;a,\;b,\;\varepsilon$}
-    \State $c \gets (a + b) / 2$
+    \State $c \gets \dfrac{a + b}{2}$
     \If{$|b - a| < \varepsilon$}
         \State \Return $c$
     \EndIf
-    \If{$f(a)f(c) leq 0$}
+    \If{$f(a)f(c) \leq 0$}
         \State \Return \Call{Bisekcija}{$f, a, c, \varepsilon$}
     \Else
         \State \Return \Call{Bisekcija}{$f, c, b, \varepsilon$}

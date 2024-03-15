@@ -60,10 +60,9 @@ Nakon uvrštavanja dobivamo polinom:
 \begin{tikzpicture}
     \begin{axis}[
         xmin=-4,xmax=4.5,
-        ymin=-5,ymax=3,
-        ]
-        \addplot[plotlinefound] expression[samples=100]{4/21*x^2 + 2/3*x - 26/7}
-          node[pos=0.5, anchor=north west] {$y=\sin(2x) + \frac{1}{2}$};
+        ymin=-5,ymax=3
+    ]
+        \addplot[plotlinefound] expression[samples=100]{4/21*x^2 + 2/3*x - 26/7} node[pos=0.5, anchor=north west]{$y= \sin{2x} + \frac{1}{2}$};
         \addplot[plotinterpolated] coordinates {(-3,-4)};
         \addplot[plotinterpolated] coordinates {(4,2)};
         \addplot[plotinterpolated] coordinates {(3,0)};
