@@ -26,6 +26,7 @@ jobs:
         with:
           packages: graphviz
           version: 1.0
+      - run: sudo dot -c
       - name: Build files
         run: make
       - name: Create Release
