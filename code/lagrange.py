@@ -17,7 +17,7 @@ def lagrange_coef(x, val):
     return a
 
 def lagrange_formula(x, y):
-    """Vraća formulu lagrange interpolacije za dane vrijednosti"""
+    """Vraća formulu lagrangeove interpolacije za dane vrijednosti"""
     # numpy dozvoljava umnožak polja po komponentama:
     return lambda val: sum(y * lagrange_coef(x, val))
     # (sporija) formula bez numpyja:

@@ -1,4 +1,4 @@
-\subsection{Simpsonova formula}
+\section{Simpsonova formula}
 
 \textbf{Simpsonova formula} je nešto složeniji primjer zatvorenih Newton-Cotesovih
 formula koji dobijemo kad podintegralnu funkciju $f$ interpoliramo kvadratnom
@@ -14,7 +14,7 @@ Simpsonova formula je oblika: $\displaystyle
 I^* = \int_a^b P_2(x)dx = \dfrac{b-a}{6}\left(f(a) + 4f\left(\dfrac{a+b}{2}\right) + f(b)\right)
 $
 
-\subsubsection{Ocjena greške}
+\subsection{Ocjena greške}
 
 Neka je $f\in C^4[a,b]$. Tada postoji $\xi \in \langle a,b\rangle$ takav da vrijedi
 $$
@@ -25,9 +25,9 @@ Ako označimo $\displaystyle M_4 = \max_{x\in[a,b]}|f^{(4)}(x)|$ onda je apsolut
 greška $\displaystyle \Delta I^* = |I - I^*| \leq \left(\dfrac{(b-a)}{2}\right)^5 \cdot \dfrac{M_4}{90}.$
 
 
-\subsubsection{Algoritam}
+\subsection{Algoritam}
 
-Pythonov \verb|scipy.integrate| modul sadrži \verb|simps| funkciju koja kao
+Pythonov \codepkg{scipy.integrate} modul sadrži \codefn{simps} funkciju koja kao
 argumente uzima numpy polja rezultata i ulaznih vrijednosti te integrira
 koristeći simpsonovu formulu.
 
@@ -49,7 +49,7 @@ koristeći simpsonovu formulu.
 \EndFunction
 \end{algorithmic}
 
-\subsubsection{Produljena Simpsonova formula}
+\subsection{Produljena Simpsonova formula}
 
 U cilju postizanja bolje aproksimacije $I^*$ integrala $I$, segment $[a,b]$
 možemo podijeliti na paran broj $(n=2m)$ podsegmenata uniformne duljine
@@ -69,9 +69,9 @@ Vrijedi:
     E_n = -\frac{b-a}{180}h^4f^{(4)}(c),\, c\in\langle a, b \rangle \,.
 \end{gather*}
 
-\bigskip
-\noindent
-\textbf{Ocjena greške}
+\pagebreak
+
+\subsubsection{Ocjena greške}
 
 Ukupna greška produljene Simpsonove formule je
 

@@ -1,4 +1,4 @@
-\subsection{Newtonova metoda (metoda tangente)}
+\section{Newtonova metoda (metoda tangente)}
 
 Newtonova metoda se smatra standardnom metodom rješavanja nelinearnih jednadžbi
 oblika $f(x)=0$, uz pretpostavku da je $f$ diferencijabilna te da je $f'(x) \neq
@@ -48,7 +48,7 @@ Nedostaci metode tangente su to što:
 
 % TODO: Slika newtonove metode
 
-\subsubsection{Konvergencija}
+\subsection{Konvergencija}
 
 Neka funkcija $f: [a,b] \to \mathbb{R}$ ima neprekidnu drugu derivaciju na
 segmentu $[a,b]$. Neka je $f(a)f(b) < 0$, odnosno neka funkcija $f$ mijenja
@@ -63,7 +63,7 @@ $$
 tada niz aproksimacija dobiven metodom tangente konvergira prema jedinstvenom
 rješenju jednadžbe $f(x) = 0$.
 
-\subsubsection{Ocjena greške}
+\subsection{Ocjena greške}
 
 Za aproksimaciju metodom tangente vrijedi ocjena greške
 $$
@@ -76,7 +76,7 @@ $$
 |\xi - x_{x+1}| \leq \dfrac{M_2}{2m_1}(x-x_i)^2.
 $$
 
-\subsubsection{Algoritam}
+\subsection{Algoritam}
 
 \begin{algorithmic}
 \Function{Newton}{$x,\;\varepsilon,\;f,\;f',\;f'',\;n$}

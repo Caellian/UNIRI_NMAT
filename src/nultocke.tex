@@ -1,0 +1,48 @@
+Cilj numeričkih metoda za rješavanje nelinearnih jednadžbi je odrediti
+\textbf{nultočku (korijen, rješenje)} neprekidne ralne funkcije $f$ na segmentu
+$[a,b]$, odnosno rješiti
+$$
+    f(x) = 0\,.
+$$
+
+Moguće je da
+\begin{itemize}
+    \item funkcija $f$ ima više realnih nultočaka i da su neke višestruke, kao i
+    da
+    \item funkcija $f$ ima kompleksne nultočke (tj. nema realne nultočke),
+\end{itemize}
+
+Ako za funkciju $f$ vrijedi $f(a)f(b) \leq 0$, onda ona na segmentu $[a,b]$
+mijenja predznak te postoji \textit{barem jedna} nultočka. Ako dodatno znamo da
+je funkcija $f$ monotona na tom segmentu, onda znamo i da je nultočka
+jedinstvena.
+
+Traženje nultočki do na zadanu točnost sastoji se od dvije faze:
+\begin{enumerate}
+    \item Određivanje što manjeg segmenta u kojem se nalazi nultočka funkcije
+    \item Nalaženje nultočke iterativnom metodom do na traženu točnost
+\end{enumerate}
+
+Osnovni korak numeričkih metoda je izolirati jedan korijen (nultočku, rješenje)
+$\xi$ jednadžbe $f(x) = 0$. Nakon što se izolira jedan korijen jednadžbe nekom
+odabranom numeričkom metodom formiramo niz aproksimacija $x_i \to \xi$.
+Numeričku metodu zaustavljamo kad se zadovolji zadani kriterij točnosti
+$$
+    |\xi - x_i | < \varepsilon\,.
+$$
+
+Vrlo često nije jednostavno prepoznati kad smo dovoljno blizu korijena, ali iz
+Teorema o srednjoj vrijednosti slijedi
+$$
+    |\xi - x_i| = \left| \frac{f(x_i)}{f'(c)} \right|, c \in [\xi, x_i]\,.
+$$
+
+\begin{definition}[red konvergencije]
+    Neka niz $(x_i)_{i\in\mathbb{N}}$ dobiven nekom iterativnom metodom
+    konvergira prema $\xi$. Ako postoje dvije pozitivne konstante $C$, $r$,
+    takve da vrijedi
+    $$
+        \lim_{i\to\infty} \left|\xi-x_{i+1}\right| \leq C|\xi-x_i|^r\,,
+    $$
+    tada kažemo da \textbf{metoda ima red konvergencije} $r$. 
+\end{definition}

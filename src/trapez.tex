@@ -1,4 +1,4 @@
-\subsection{Trapezna formula}
+\section{Trapezna formula}
 
 Najjednostavniji primjer zatvorenih Newton-Cotesovih formula dobijemo kad
 podintegralnu funkciju $f$ interpoliramo linearnom funkcijom u čvorovima
@@ -11,7 +11,7 @@ Trapezna formula ima oblik: $\displaystyle
 I^* = \int_a^b P_1(x)dx = (b-a)\dfrac{f(a)+f(b)}{2}
 $
 
-\subsubsection{Ocjena greške}
+\subsection{Ocjena greške}
 
 Neka je $f\in C^2[a,b]$. Tada postoji $\xi \in [a,b]$ takav da vrijedi
 $$
@@ -21,9 +21,9 @@ $$
 Ako označimo $\displaystyle M_2 = \max_{x\in[a,b]}|f''(x)|$ onda je apsolutna
 greška $\displaystyle \Delta I^* = |I - I^*| \leq \dfrac{(b-a)^3}{12}M_2.$
 
-\subsubsection{Algoritam}
+\subsection{Algoritam}
 
-Pythonov \verb|scipy.integrate| modul sadrži \verb|trapz| funkciju koja kao
+Pythonov \codepkg{scipy.integrate} modul sadrži \codefn{trapz} funkciju koja kao
 argumente uzima numpy polja rezultata i ulaznih vrijednosti te integrira
 koristeći trapeznu formulu.
 
@@ -42,7 +42,7 @@ Funkcija za integraciju na intervalu $[a, b]$ uz $n$ trapeza je:
 \EndFunction
 \end{algorithmic}
 
-\subsubsection{Produljena trapezna formula}
+\subsection{Produljena trapezna formula}
 
 Početni segment $[a,b]$ dijelimo na $n$ podsegmenata uniformne duljine
 $$
@@ -74,9 +74,7 @@ gdje je $f(x_i) = y_i, i\in [0, n]$.
 %     \end{axis}
 % \end{tikzpicture}
 
-\bigskip
-\noindent
-\textbf{Ocjena greške}
+\subsubsection{Ocjena greške}
 
 Ukupna greška produljene trašezne formule je
 $$

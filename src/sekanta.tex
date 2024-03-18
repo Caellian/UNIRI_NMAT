@@ -1,4 +1,4 @@
-\subsection{Metoda sekante}
+\section{Metoda sekante}
 
 Metoda sekante premošćuje prethodno navedene probleme metode tangente.
 
@@ -22,13 +22,13 @@ $$
 |x_{n+1}-x_n| = |f(x_n)|\cdot\left|\frac{x_n-x_{n-1}}{f(x_n)-f(x_{n-1})}\right|
 $$
 
-\subsubsection{Brzina konvergencije}
+\subsection{Brzina konvergencije}
 
 Ako su početne aproksimacije $x_0$ i $x_1$ birane dovoljno blizu rješenja, tada
 uz uvjete $f'(x)\neq 0$ i $f''(x)\neq 0$, metoda sekante konvergira brzinom
 $\frac{1+\sqrt{5}}{2}\approx 1.618$.
 
-\subsubsection{Algoritam}
+\subsection{Algoritam}
 
 \begin{algorithmic}
 \Function{Sekanta}{$a,\;b,\;\varepsilon,\;f,\;n$}

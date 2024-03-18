@@ -15,7 +15,7 @@ def newton_coef(x, y):
     return a
 
 def newton_formula(x, y):
-    """Vraća formulu newton interpolacije za dane vrijednosti"""
+    """Vraća formulu newtonove interpolacije za dane vrijednosti"""
     coef = newton_coef(x, y)
     
     def iprod(i, val):
