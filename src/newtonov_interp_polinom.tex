@@ -134,7 +134,7 @@ Konačna razlika je oblika:
 Vrijedi \textbf{lema o vezi podijeljenih i konačnih razlika}:
 
 $$
-f[x_0,x_1,\dots,x_n] = \frac{\Delta^nf(x_0)}{n!h^n},\qquad x_{i+1_-x}i=h,\qquad i\in [0,n\rangle
+f[x_0,x_1,\dots,x_n] = \frac{\Delta^nf(x_0)}{n!h^n},\qquad x_{i+1}-x_i=h,\qquad i\in [0,n\rangle
 $$
 
 Zbog leme o vezi razlika, tablica konačnih razlika izgleda identično tablici podijeljenih razlika.
@@ -189,11 +189,11 @@ $$
 Nakon što smo odredili sve konačne razlike, možemo ih uvrstiti u prethodnu formulu:
 
 \begin{align*}
-p_4(x) =& 0 + \frac{0.7071}{1!\cdot0.25^1}(x-0) + \frac{-0.4142}{2!\cdot0.25^2}(x-0)(x-0.25)
+p_4(x) =&\, 0 + \frac{0.7071}{1!\cdot0.25^1}(x-0) + \frac{-0.4142}{2!\cdot0.25^2}(x-0)(x-0.25)
 +\frac{-0.1716}{3!\cdot0.25^3}(x-0)(x-0.25)(x-0.5)\\
 &+\frac{0.3432}{4!\cdot0.25^4}(x-0)(x-0.25)(x-0.5)(x-0.75)\\
-=&2.8284x − 3.3136x(x − 0.25) − 1.8304x(x − 0.25)(x − 0.5) + 3.6608x(x − 0.25)(x − 0.5)(x − 0.75)\\
-=&3.6608x^4 - 7.3216x^3 + 0.576x^2 + 3.0848x
+=&\,2.8284x − 3.3136x(x − 0.25) − 1.8304x(x − 0.25)(x − 0.5) + 3.6608x(x − 0.25)(x − 0.5)(x − 0.75)\\
+=&\,3.6608x^4 - 7.3216x^3 + 0.576x^2 + 3.0848x
 \end{align*}
 
 \begin{tikzpicture}
@@ -214,6 +214,15 @@ p_4(x) =& 0 + \frac{0.7071}{1!\cdot0.25^1}(x-0) + \frac{-0.4142}{2!\cdot0.25^2}(
 \end{tikzpicture}
 
 \newpage
+
+\subsection{Računanje newtonovog polinoma u Pythonu}
+
+\begin{example}
+    Odredite vrijednost newtonovog polinoma točaka iz prethodnog zadatka u
+    Pythunu za $x=1.5$.
+\end{example}
+
+\input{../code/newton}
 
 \subsection{Ocjena greške lagrangeovog i newtonovog interpolacijskog polinoma}
 
@@ -257,6 +266,12 @@ Na intervalu $[0,1], \cos(\pi x)$ zauzima najveću vrijednost ($1$) za $x=0$ te 
 $$
 \mathrm{M}_5 = \left|\pi^5\cos(\pi \cdot 0)\right| = \left|\pi^5\cdot1\right| = \pi^5
 $$
+
+\subsection{Određivanje greške newtonovog polinoma u Pythonu}
+
+Taj izraz možemo zapisati u Pythonu kako bi dobili funkciju za računanje greške u nekoj točki $z$:
+
+\input{../code/newton_err}
 
 \subsection{Nedostaci}
 

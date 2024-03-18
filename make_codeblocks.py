@@ -8,7 +8,7 @@ from pygments import highlight
 from pygments.lexers import get_lexer_for_filename
 from pygments.formatters import LatexFormatter
 
-DEFAULT_STYLE = "colorful"
+DEFAULT_STYLE = "xcode"
 
 def generate_latex_code(source, formatter):
     if Path(source).suffix == ".tex":

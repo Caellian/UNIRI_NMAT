@@ -121,9 +121,35 @@ $$
 
 \end{multicols}
 
+\subsection{Određivanje linearnog splajna u Pythonu}
+
+\begin{example}
+    Uporabom \codepkg{matplotlib} biblioteke, prikaži u Pythonu linearni splajn
+    za podatke iz prethodnog primjera.
+\end{example}
+
+U sklopu \codepkg{numpy} biblioteke je sadržana \codefn{interp} funkcija koja
+računa linearnu interpolaciju za \verb|xr| točke (prvi argument), pomoću ulaznih
+\verb|x| vrijednosti (drugi argument) i njima sukladnih \verb|y| vrijednosti
+(treći agrument).
+
+\begin{multicols}{2}
+    \input{../code/lin_spline.tex}
+
+    \columnbreak
+
+    \textbf{Rezultat prikaza}
+
+    \includegraphics[width=\linewidth]{fig/lin_splajn.png}
+\end{multicols}
+
+Prethodno se koristila \codefn{scipy.interpolate.interp1d} funkcija sa argumentom \codenamedarg{kind}{\codestr{"linear"}}.
+
+\newpage
+
 \subsection{Ocjena greške}
 
-Ocjena greške linearnog splajna slijedi iz ovjene greške interpolacijskog polinoma.
+Ocjena greške linearnog splajna slijedi iz ocjene greške interpolacijskog polinoma.
 
 Neka je $f(x)\in\mathcal{C}^2[a,b]$. Tada je ocjena greške interpolacije funkcije $f$ linearnim splajnom:
 

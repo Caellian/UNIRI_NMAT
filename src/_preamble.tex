@@ -36,12 +36,17 @@
     urlbordercolor=blue
 }
 
-\include{_labels}
-\include{_graphs}
-\include{_boxes}
-\include{_pygments}
-\include{_algorithms}
-\include{../code/_style}
+\input{_labels}
+\input{_graphs}
+\input{_boxes}
+\input{_algorithms}
+\input{../code/_style}
+
+\newcommand{\codepkg}[1]{\texttt{\PY{n+nn}{#1}}}
+\newcommand{\codefn}[1]{\texttt{\PY{n+nf}{#1}}}
+\newcommand{\codestr}[1]{\PY{l+s+s1}{#1}}
+\newcommand{\codenamedarg}[2]{\PY{n}{#1}\PY{o}{=}#2}
+
 
 \title{Skripta: Numerička Matematika}
 \author{Tin Švagelj}

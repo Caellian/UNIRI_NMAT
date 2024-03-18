@@ -228,6 +228,30 @@ Konačno, $\Phi(2.33)=p_2(2.33)=0.4286$.
 
 \newpage
 
+\subsection{Određivanje kubičnog splajna u Pythonu}
+
+\begin{example}
+    Uporabom \codepkg{matplotlib} biblioteke, prikaži u Pythonu linearni splajn
+    za podatke iz prethodnog primjera.
+\end{example}
+
+U sklopu \codepkg{scipy} biblioteke je u \codepkg{interpolate} modulu sadržana
+\codefn{CubicSpline} funkcija koja računa kubičnu interpolaciju pomoću ulaznih
+\verb|x| vrijednosti (prvi argument) i njima sukladnih \verb|y| vrijednosti
+(drugi agrument), te kao rezultat daje formulu za interpolaciju.
+
+\begin{multicols}{2}
+    \input{../code/kub_spline.tex}
+
+    \columnbreak
+
+    \textbf{Rezultat prikaza}
+
+    \includegraphics[width=\linewidth]{fig/kub_splajn.png}
+\end{multicols}
+
+Prethodno se koristila \codepkg{scipy.interpolate.}\codefn{interp1d} funkcija sa argumentom \codenamedarg{kind}{\codestr{"cubic"}}.
+
 \subsection{Greška kubičnog splajna}
 
 Za kubični splajn ocjena greške je
