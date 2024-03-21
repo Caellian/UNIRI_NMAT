@@ -106,7 +106,7 @@ X = A^{-1}\cdot B =
 Rješavanjem sustava dobivamo $a_0=3$, $a_1=\frac{5}{4}$,\break$a_2=-\frac{3}{8}$,
 kao i interpolaciju funkcije:
 $$
-p_2(x) = 3 + \frac{5x}{4} + -\frac{3x^2}{8}
+p_2(x) = 3 + \frac{5}{4}x - \frac{3}{8}x^2
 $$
 
 \newcolumn
@@ -129,11 +129,29 @@ $$
 
 \pagebreak
 
-\subsection{Algoritam}
+\subsection{Rješavanje sustava jednadžbi u Pythonu}
 
 \begin{example}
     Odredite interpolacijski polinom uporabom vandermondeove determinante u
     Pythonu za točke iz prethodnog primjera.
 \end{example}
 
-\input{../code/vandermond}
+\begin{multicols}{2}
+    \input{../code/vandermond}
+
+    \columnbreak
+
+    \textbf{Ispis}
+
+    \begin{verbatim}
+    Rješenje sustava: [ 3.     1.25  -0.375]
+    p(0) = 3.0
+    p(2) = 4.0
+    p(4) = 2.0
+    \end{verbatim}
+
+    \textbf{Rezultat prikaza}
+
+    \includegraphics[width=\linewidth]{fig/vandermond.png}
+
+\end{multicols}

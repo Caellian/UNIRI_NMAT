@@ -9,3 +9,37 @@ Crtanje se provodi pomoću \codefn{plot} funkcije.
 
 \input{../code/grafovi}
 
+\subsection{Format teksta za stil}
+
+Format je oblika \verb|fmt = '[marker][line][color]'|, drukčiji redoslijed
+znakova je isto podržan ali može dati neočekivane rezultate.
+
+\begin{itemize}
+    \item Popis \verb|marker|a je dostupan u \href{https://matplotlib.org/stable/api}{službenoj dokumentaciji} pod \href{https://matplotlib.org/stable/api/markers_api.html}{\codepkg{matplotlib.markers}}.
+    \item \verb|line| može biti:
+    \begin{itemize}
+        \item '-' za punu liniju
+        \item '--' za iscrtkanu liniju
+        \item '-.' za crta-točka-crta liniju
+        \item ':' za istočkanu liniju
+    \end{itemize}
+    \item \verb|color| podržava kratke nazive:
+    \begin{itemize}
+        \item 'b' za plavu boju
+        \item 'g' za zelenu boju
+        \item 'r' za crvenu boju
+        \item 'c' za tirkiznu boju
+        \item 'm' za magenta boju
+        \item 'y' za žutu boju
+        \item 'k' za crnu boju
+        \item 'w' za bijelu boju
+    \end{itemize}
+\end{itemize}
+
+\subsection{Parametri za stil}
+
+Osim teksta za format je moguće koristiti i imenovane paremetre poput
+\codenamed{alpha}, \codenamed{color}, \codenamed{dashes}, \codenamed{fillstyle},
+\codenamed{linestyle}, \codenamed{gapcolor}, \codenamed{marker},
+\codenamed{markeredgecolor}, \codenamed{markeredgewidth},
+\codenamed{markersize}, \codenamed{markevery}, itd.

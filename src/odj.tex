@@ -35,30 +35,36 @@ vrijedi:
 Nedostatak ove metode je što se greška globalno akumulira i što ako su koraci
 veliki, krajnji rezultat može jako odstupati od stvarnog. Kako bi dobili bolje
 rezultate, korak $h$ mora biti izrazito mali.
-
 \smallskip
-
-\begin{algorithmic}
-\Function{Euler}{$x_0,\;y_0,\;h,\;f,\;n$}
-    \State $x \gets [x_0]$
-    \State $y \gets [y_0]$
-    \For{$i \in [1, n]$}
-        \State $slope \gets f(x[i-1], y[i-1])$
-        \State $x_{\text{new}} \gets x[i-1] + h$
-        \State $x \gets [...x,\;x_{\text{new}}]$
-        \State $y_{\text{new}} \gets y[i-1] + h \cdot slope$
-        \State $y \gets [...y,\;y_{\text{new}}]$
-    \EndFor
-    \State \Return $x,\;y$
-\EndFunction
-\end{algorithmic}
-
-\smallskip
-
 \textbf{Lokalna greška} ove metode je reda 2, no globalno se akumulira pa je
 metoda samo prvog reda točnosti. Ovisno o kontekstu promatranja (npr. kaotično
 kretanje čestica), globalna ocjena greška može iznimno odstupati od stvarne
 greške.
+
+\begin{multicols}{2}
+\subsection{Algoritam eulerove metode}
+
+\begin{algorithmic}
+    \Function{Euler}{$x_0,\;y_0,\;h,\;f,\;n$}
+        \State $x \gets [x_0]$
+        \State $y \gets [y_0]$
+        \For{$i \in [0, n\rangle$}
+            \State $slope \gets f(x[i], y[i])$
+            \State $x_{\text{new}} \gets x[i] + h$
+            \State $x \gets [...\,x,\;x_{\text{new}}]$
+            \State $y_{\text{new}} \gets y[i] + h \cdot slope$
+            \State $y \gets [...\,y,\;y_{\text{new}}]$
+        \EndFor
+        \State \Return $x,\;y$
+    \EndFunction
+\end{algorithmic}
+
+\columnbreak
+
+\subsection{Eulerova metoda u Pythonu}
+\input{../code/euler}
+
+\end{multicols}
 
 \section{Runge-Kutta metode}
 
@@ -114,26 +120,6 @@ Tipično se odabire Runge-Kutta metoda četvrtog reda, jer daljnjim povećanjem
 reda točnosti metode se znatno smanjuje stabilnost i povećava zahtjevnost
 proračuna, pa isplativost postaje upitna.
 
-\begin{algorithmic}
-\Function{RK4}{$x_0,\;y_0,\;h,\;f,\;n$}
-    \State $x \gets [x_0]$
-    \State $y \gets [y_0]$
-    \For{$i \in [1, n]$}
-        \State $k_1 \gets f(\;x[i-1], \phantom{\ \,+ h \cdot \frac{1}{2}} \;y[i-1] \phantom{\ + h \cdot \frac{1}{2}\cdot k_1}\;)$
-        \State $k_2 \gets f(\;x[i-1] + h \cdot \frac{1}{2},               \;y[i-1] + h \cdot \frac{1}{2}\cdot k_1\;)$
-        \State $k_3 \gets f(\;x[i-1] + h \cdot \frac{1}{2},               \;y[i-1] + h \cdot \frac{1}{2}\cdot k_2\;)$
-        \State $k_4 \gets f(\;x[i-1] + h, \phantom{\ \,\cdot \frac{1}{2}} \;y[i-1] + h \cdot k_3 \phantom{\ \frac{1}{2}\cdot}\;)$
-        
-        \State $x_{\text{new}} \gets x[i-1] + h$
-        \State $x \gets [...x, x_{\text{new}}]$
-        
-        \State $y_{\text{new}} \gets y[i-1] + h \cdot \frac{1}{6} \cdot (k_1 + 2k_2 + 2k_3 + k_4)$
-        \State $y \gets [...y, y_{\text{new}}]$
-    \EndFor
-    \State \Return $x,\;y$
-\EndFunction
-\end{algorithmic}
-
 Obično se isplati koristiti Runge-Kutta metode više od eulerove jer unatoč većem
 broju potrebnih izračuna, te metode daju puno bolje rezultate za isti korak $h$
 od eulerove pa onda i korak može biti veći.
@@ -152,6 +138,49 @@ Generalizacija \textit{eksplicitnih} Runge-Kutta metoda, za $s$-ti red točnosti
 Zbog nestabilnosti eksplicitnih Runge-Kutta metoda se pojavljuju i implicitne,
 koje su značajne za rješavanje parcijalnih diferencijalnih jednadžbi, no one su
 i značajno skuplje za izračun. Primjer takve metode je Gauss-Legendre metoda.
+
+\begin{multicols}{2}
+    
+\subsection{Algoritam za RK4}
+
+\begingroup
+\makeatletter
+\@totalleftmargin=-0.5cm
+\begin{algorithmic}
+    \Function{RK4}{$x_0,\;y_0,\;h,\;f,\;n$}
+        \State $x \gets [x_0]$
+        \State $y \gets [y_0]$
+        \For{$i \in [0, n\rangle$}
+            \State $k_1 \gets f(\;x[\,i\,], \phantom{\ \,+ h \cdot \frac{1}{2}} \;y[\,i\,] \phantom{\ + h \cdot \frac{1}{2}\cdot k_1}\;)$
+            \State $k_2 \gets f(\;x[\,i\,] + h \cdot \frac{1}{2},               \;y[\,i\,] + h \cdot \frac{1}{2}\cdot k_1\;)$
+            \State $k_3 \gets f(\;x[\,i\,] + h \cdot \frac{1}{2},               \;y[\,i\,] + h \cdot \frac{1}{2}\cdot k_2\;)$
+            \State $k_4 \gets f(\;x[\,i\,] + h, \phantom{\ \,\cdot \frac{1}{2}} \;y[\,i\,] + h \cdot k_3 \phantom{\ \frac{1}{2}\cdot}\;)$
+            
+            \State $x_{\text{new}} \gets x[\,i\,] + h$
+            \State $x \gets [...\,x, x_{\text{new}}]$
+            
+            \State $y_{\text{new}} \gets y[\,i\,] + h \cdot \frac{1}{6} \cdot (k_1 + 2k_2 + 2k_3 + k_4)$
+            \State $y \gets [...\,y, y_{\text{new}}]$
+        \EndFor
+        \State \Return $x,\;y$
+    \EndFunction
+\end{algorithmic}
+\endgroup
+
+\columnbreak
+
+\subsection{Implementacija RK4 u Pythonu}
+
+\begingroup
+\makeatletter
+\@totalleftmargin=-1cm
+\input{../code/runge_kutta}
+
+\endgroup
+
+\end{multicols}
+
+\newpage
 
 \section{Sustavi običnih diferencijalnih jednadžbi}
 

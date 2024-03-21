@@ -21,13 +21,15 @@ $$
 Ako označimo $\displaystyle M_2 = \max_{x\in[a,b]}|f''(x)|$ onda je apsolutna
 greška $\displaystyle \Delta I^* = |I - I^*| \leq \dfrac{(b-a)^3}{12}M_2.$
 
-\subsection{Algoritam}
+\subsection{Algoritam za trapeznu formulu}
 
 Pythonov \codepkg{scipy.integrate} modul sadrži \codefn{trapz} funkciju koja kao
 argumente uzima numpy polja rezultata i ulaznih vrijednosti te integrira
 koristeći trapeznu formulu.
 
-Funkcija za integraciju na intervalu $[a, b]$ uz $n$ trapeza je:
+\bigskip
+\noindent
+Algoritam za integraciju na intervalu $[a, b]$ uz $n$ trapeza je:
 \begin{algorithmic}
 \Function{Trapez}{$a,\;b,\;h,\;f,\;n$}
     \State $h \gets \dfrac{b - a}{n}$

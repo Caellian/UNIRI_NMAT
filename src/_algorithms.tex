@@ -26,7 +26,15 @@
 \algrenewtext{EndLoop}{\textbf{kraj petlje}}
 \algrenewtext{Break}{\textbf{prekid petlje}}
 
-\algrenewcommand{\algorithmiccomment}[1]{\hskip3em\textcolor{darkgray}{// #1}}
+\algrenewcommand{\algorithmiccomment}[1]{\hskip2em\textcolor{darkgray}{// #1}}
 
 \algnewcommand{\algorithmicerror}{\textbf{\textit{pogreška:}}}
-\algnewcommand{\Error}[1]{\State \algorithmicerror{} \begin{minipage}{\linewidth} \raggedright \textit{#1} \end{minipage}}
+\algnewcommand{\Error}[1]{\State \algorithmicerror{} \begin{minipage}{0.8\linewidth} \raggedright \textit{#1} \end{minipage}}
+
+\newcommand{\codepkg}[1]{\texttt{\PY{n+nn}{#1}}}
+\newcommand{\codefn}[1]{\texttt{\PY{n+nf}{#1}}}
+\newcommand{\codeclass}[1]{\PY{n+nc}{#1}}
+\newcommand{\codenamed}[1]{\PY{n}{#1}}
+\newcommand{\codefield}[1]{\PY{n}{#1}}
+\newcommand{\codestr}[1]{\PY{l+s+s1}{#1}}
+\newcommand{\codenamedarg}[2]{\codenamed{#1}\PY{o}{=}#2}

@@ -76,27 +76,36 @@ $$
 |\xi - x_{x+1}| \leq \dfrac{M_2}{2m_1}(x-x_i)^2.
 $$
 
-\subsection{Algoritam}
+\begin{multicols}{2}
+    
+\subsection{Algoritam za metodu tangente}
 
 \begin{algorithmic}
-\Function{Newton}{$x,\;\varepsilon,\;f,\;f',\;f'',\;n$}
-    \If{$f(x) \cdot f''(x) < 0$}
-        \Error{Newtonova metoda ne konvergira.\linebreak Treba izabrati drugu početnu aproksimaciju.}
-    \Else
-        \State $i \gets 1$
-        \While{$i \leq n$}
-            \If{$\lvert f'(x) \rvert < \varepsilon$}
-                \State \textbf{break} \Comment{Horizontalna tangenta}
-            \EndIf
-            \State $dx \gets \dfrac{f(x)}{f'(x)}$
-            \State $x \gets x - dx$
-            \If{$\lvert dx \rvert < \varepsilon$}
-                \State \Return $x,\;i$
-            \Else
-                \State $i \gets i + 1$
-            \EndIf
-        \EndWhile
-        \Error{Rješenje na zadanu točnost nije nađeno u zadanom broju iteracija.}
-    \EndIf
+\If{$f(x) \cdot f''(x) < 0$} \Comment{Provjera konvergacije}
+    \Error{Potrebna druga početna aproksimacija.}
+\EndIf
+\Function{Newton}{$x,\;\varepsilon,\;f,\;f',\;n$}
+    \State $i \gets 1$
+    \While{$i \leq n$}
+        \If{$\lvert f'(x) \rvert < \varepsilon$}
+            \State \textbf{break} \Comment{Horizontalna tangenta}
+        \EndIf
+        \State $dx \gets \dfrac{f(x)}{f'(x)}$
+        \State $x \gets x - dx$
+        \If{$\lvert dx \rvert < \varepsilon$}
+            \State \Return $x,\;i$
+        \Else
+            \State $i \gets i + 1$
+        \EndIf
+    \EndWhile
+    \Error{Rješenje nije nađeno u $n$ iteracija.}
 \EndFunction
 \end{algorithmic}
+
+\columnbreak
+
+\subsection{Metoda tangente u Pythonu}
+
+\input{../code/tangenta}
+
+\end{multicols}

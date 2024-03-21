@@ -28,24 +28,38 @@ Ako su početne aproksimacije $x_0$ i $x_1$ birane dovoljno blizu rješenja, tad
 uz uvjete $f'(x)\neq 0$ i $f''(x)\neq 0$, metoda sekante konvergira brzinom
 $\frac{1+\sqrt{5}}{2}\approx 1.618$.
 
-\subsection{Algoritam}
+\begin{multicols}{2}
+
+\subsection{Algoritam za metodu sekante}
 
 \begin{algorithmic}
 \Function{Sekanta}{$a,\;b,\;\varepsilon,\;f,\;n$}
-    \State $i \gets 1$
+    \State $i \gets 0$
     \While{$\lvert b - a \rvert > \varepsilon$}
         \State $i \gets i + 1$
         \State $x_i \gets b - \dfrac{f(b) \cdot (b - a)}{f(b) - f(a)}$
         \If{$f(x_i) = 0$}
-            \State \Return $x_i,\;i$ \Comment{Pronađeno je egzaktno rješenje.}
+            \State \Return $x_i,\;i$ \Comment{Egzaktno rješenje}
         \Else
             \State $a \gets b$
             \State $b \gets x_i$
         \EndIf
-        \If{$i \geq n$}
-            \Error{Rješenje na zadanu točnost nije nađeno u zadanom broju iteracija.}
+        \If{$i > n$}
+            \Error{Rješenje nije nađeno u $n$ iteracija.}
         \EndIf
     \EndWhile
-    \State \Return $x_i,\;i$
+    \State \Return $b,\,i$
 \EndFunction
 \end{algorithmic}
+
+\columnbreak
+
+\subsection{Metoda sekante u Pythonu}
+
+\begingroup
+\makeatletter
+\@totalleftmargin=-1cm
+\input{../code/sekanta}
+\endgroup
+
+\end{multicols}
