@@ -21,8 +21,8 @@ Kubični splajn je funkcija $s(x)\in\mathcal{C}^2(\langle x_0,x_n\rangle)$ koja 
 
 \begin{itemize}
     \item na svakom podintervalu $[x_i, x_{i+1}\rangle, i\in[0,n\rangle$ polinom najviše trećeg stupnja,
-    \item u čvorovima interpolacije zadovoljava uvjete interpolacije te
-    \item ima neprekidnu drugu derivaciju
+    \item u čvorovima interpolacije zadovoljava uvjete interpolacije, te
+    \item ima neprekidnu drugu derivaciju.
 \end{itemize}
 
 Na svakom podintervalu koriste se polinomi:
@@ -257,10 +257,10 @@ Prethodno se koristila \codepkg{scipy.interpolate.}\codefn{interp1d} funkcija s 
 
 Za kubični splajn ocjena greške je
 
-\begin{align}
+\begin{align*}
 |f(x)-\phi(x)|\leq&\frac{\text{M}_4}{4!}\frac{h^4}{16}={1\over384}h^4\text{M}_4,\\
-\text{M}_4=&\max_{x\in[a,b]}|f^{(IV)}(x)|,\\
+\text{M}_4=&\max_{x\in[a,b]}\left|f^{(IV)}(x)\right|,\\
 h=&\max_{i\in[1,n]}h_i,\qquad h_i=x_{i+1}-x_i.
-\end{align}
+\end{align*}
 
 Drugim rjećima, ravnomjernim povećavanjem čvorova kubičnog splajna tako da $h\to0$, maksimalna greška te interpolacije se približava 0.

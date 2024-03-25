@@ -52,7 +52,7 @@ koristeći simpsonovu formulu.
 \subsection{Produljena Simpsonova formula}
 
 U cilju postizanja bolje aproksimacije $I^*$ integrala $I$, segment $[a,b]$
-možemo podijeliti na paran broj $(n=2m)$ podsegmenata uniformne duljine
+možemo podijeliti na $n$ podsegmenata uniformne duljine
 $$
 h=\frac{b-a}{n}\,,
 $$
@@ -65,8 +65,8 @@ Vrijedi:
 
 \begin{gather*}
     I = I^* + E_n\,,\\
-    I^* = \frac{h}{3}(y_0+y_{2m}+4(y_1+\dots+y_{2m-1})+2(y_2+\dots+y_{2m-2}))\,,\\
-    E_n = -\frac{b-a}{180}h^4f^{(4)}(c),\, c\in\langle a, b \rangle \,.
+    I^* \approx \frac{h}{3}(y_0+y_{2m}+4(y_1+\dots+y_{2m-1})+2(y_2+\dots+y_{2m-2}))\,,\\
+    E_n = -\frac{b-a}{180}h^4f^{(4)}(\xi),\, \xi\in\langle a, b \rangle\,.
 \end{gather*}
 
 \pagebreak

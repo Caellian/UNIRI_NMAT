@@ -4,13 +4,13 @@
 Newtonov interpolacijski polinom rješava problem loše memoizacije koji lagrangeov polinom ima prilikom dodavanja interpoliranih točaka. Rješava to jer je definiran kao \textbf{rekurzivna funkcija} kojoj se \textbf{mogu pridodati članovi} kako bi aproksimacija davala točne vrijednosti za novonastali skup:
 
 \begin{equation}
-{\mathbf p}_n(x) \coloneq \mathbf{p}_{n-1}(x) + \mathbf{c}(x)
+\mathbf{p}_n(x) \coloneq \mathbf{p}_{n-1}(x) + \mathbf{c}(x)
 \end{equation}
 
-${\mathbf c}(x)$ nazivamo korekcijom, i ona je polinom stupnja $n$, oblika:
+$\mathbf{c}(x)$ nazivamo korekcijom, i ona je polinom stupnja $n$, oblika:
 
 \begin{equation}
-{\mathbf c}(x) \coloneq {\mathbf a}_n\prod_{i=0}^{n-1}(x-x_i) = {\mathbf a}_n(x-x_0)(x-x_1)\dots(x-x_{n-1}).
+\mathbf{c}(x) \coloneq \mathbf{a}_n\prod_{i=0}^{n-1}(x-x_i) = \mathbf{a}_n(x-x_0)(x-x_1)\dots(x-x_{n-1}).
 \end{equation}
 
 \subsection{Podijeljena razlika}
@@ -70,7 +70,7 @@ $$
 f[x_0, x_1, \dots, x_n] = \frac{f[x_1, \dots, x_n]- f[x_0, \dots, x_{n-1}]}{x_n - x_0}
 $$
 
-Indukcijom iz rekurzivne relacije izvodimo \textbf{lineariziran oblik za podijeljenu razliku $n$-tog reda} koji nije rekurzivan:
+Indukcijom iz rekurzivne relacije izvodimo lineariziran oblik za podijeljenu razliku $n$-tog reda koji nije rekurzivan:
 
 $$
 f[x_a, \dots, x_b] = \sum_{i=a}^{b} \frac{f(x_i)}{\prod_{\substack{j=a\\j\neq i}}^b(x_i - x_j)},\qquad a>0,\qquad b>a
